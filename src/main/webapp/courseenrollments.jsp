@@ -21,28 +21,20 @@
                 %>
                 <table>
                 <tr>
-                <th>Course Id</th>
-                <th>Course Number</th>
-                <th>Unit</th>
-                <th>Grade Status</th>
-                <th>Prerequisites</th>
-                <th>General Topic</th>
-                <th>Instructor Consent</th>
-                <th>Is Required Lab Work</th>
-                <th>Is Lower</th>
+                <th>ENROLLMENTID</th>
+                <th>STUDENTID</th>
+                <th>COURSEID</th>
+                <th>SECTIONID</th>
+                <th>unit</th>
                 </tr>
                 <tr>
-                <form action="courses.jsp" method="get">
+                <form action="courseenrollments.jsp" method="get">
                 <input type="hidden" value="insert" name="action">
+                <th><input value="" name="ENROLLMENTID" size="10"></th>
+                <th><input value="" name="STUDENTID" size="10"></th>
                 <th><input value="" name="COURSEID" size="10"></th>
-                <th><input value="" name="COURSENUMBER" size="10"></th>
-                <th><input value="" name="UNIT" size="15"></th>
-                <th><input value="" name="GRADESTATUS" size="15"></th>
-                <th><input value="" name="PREREQUISITES" size="15"></th>
-                <th><input value="" name="GENERALTOPIC" size="15"></th>
-                <th><input value="" name="INSTRUCTORCONSENT" size="15"></th>
-                <th><input value="" name="ISREQUIREDLABWORK" size="15"></th>
-                <th><input value="" name="ISLOWER" size="15"></th>
+                <th><input value="" name="SECTIONID" size="10"></th>
+                <th><input value="" name="unit" size="15"></th>
                 <th><input type="submit" value="Insert"></th>
                 </form>
                 </tr>
@@ -54,16 +46,12 @@
                 // Create the prepared statement and use it to
                 // INSERT the student attrs INTO the Student table.
                 PreparedStatement pstmt = connection.prepareStatement(
-                ("INSERT INTO COURSE VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)"));
-                pstmt.setInt(1,Integer.parseInt(request.getParameter("COURSEID")));
-                pstmt.setString(2, request.getParameter("COURSENUMBER"));
-                pstmt.setInt(3,Integer.parseInt(request.getParameter("UNIT")));
-                pstmt.setInt(4,Integer.parseInt(request.getParameter("GRADESTATUS")));
-                pstmt.setString(5, request.getParameter("PREREQUISITES"));
-                pstmt.setString(6, request.getParameter("GENERALTOPIC"));
-                pstmt.setBoolean(7, Boolean.parseBoolean(request.getParameter("INSTRUCTORCONSENT")));
-                pstmt.setBoolean(8, Boolean.parseBoolean(request.getParameter("ISREQUIREDLABWORK")));
-                pstmt.setBoolean(9, Boolean.parseBoolean(request.getParameter("ISLOWER")));
+                ("INSERT INTO COURSEENROLLMENT VALUES (?, ?, ?, ?, ?)"));
+                pstmt.setInt(1, Integer.parseInt(request.getParameter("ENROLLMENTID")));
+                pstmt.setInt(2, Integer.parseInt(request.getParameter("STUDENTID")));
+                pstmt.setInt(3, Integer.parseInt(request.getParameter("COURSEID")));
+                pstmt.setInt(4, Integer.parseInt(request.getParameter("SECTIONID")));
+                pstmt.setInt(5, Integer.parseInt(request.getParameter("unit")));
                 pstmt.executeUpdate();
                 connection.commit();
                 connection.setAutoCommit(true);
@@ -76,18 +64,12 @@ connection.setAutoCommit(false);
 // Create the prepared statement and use it to
 // UPDATE the student attributes in the Student table.
 PreparedStatement pstatement = connection.prepareStatement(
-"UPDATE COURSE SET ISLOWER = ?,COURSENUMBER = ?, UNIT = ?,GRADESTATUS = ?, PREREQUISITES = ?," +
-"GENERALTOPIC = ?, INSTRUCTORCONSENT = ?,ISREQUIREDLABWORK = ?  WHERE COURSEID = ?");
-pstatement.setBoolean(1, Boolean.parseBoolean(request.getParameter("ISLOWER")));
-pstatement.setString(2, request.getParameter("COURSENUMBER"));
-pstatement.setInt(3,Integer.parseInt(request.getParameter("UNIT")));
-pstatement.setInt(4,Integer.parseInt(request.getParameter("GRADESTATUS")));
-pstatement.setString(5, request.getParameter("PREREQUISITES"));
-pstatement.setString(6, request.getParameter("GENERALTOPIC"));
-pstatement.setBoolean(7, Boolean.parseBoolean(request.getParameter("INSTRUCTORCONSENT")));
-pstatement.setBoolean(8, Boolean.parseBoolean(request.getParameter("ISREQUIREDLABWORK")));
-pstatement.setInt(9,Integer.parseInt(request.getParameter("COURSEID")));
-
+"UPDATE COURSEENROLLMENT SET STUDENTID = ?, COURSEID = ?, SECTIONID = ?, unit = ? WHERE ENROLLMENTID=? ");
+pstatement.setInt(1, Integer.parseInt(request.getParameter("STUDENTID")));
+pstatement.setInt(2, Integer.parseInt(request.getParameter("COURSEID")));
+pstatement.setInt(3, Integer.parseInt(request.getParameter("SECTIONID")));
+pstatement.setInt(4, Integer.parseInt(request.getParameter("unit")));
+pstatement.setInt(5, Integer.parseInt(request.getParameter("ENROLLMENTID")));
 int rowCount = pstatement.executeUpdate();
 connection.setAutoCommit(false);
 connection.setAutoCommit(true);
@@ -98,8 +80,8 @@ connection.setAutoCommit(false);
 // Create the prepared statement and use it to
 // DELETE the student FROM the Student table.
 PreparedStatement pstmt = connection.prepareStatement(
-"DELETE FROM COURSE WHERE COURSEID = ?");
-pstmt.setInt(1,Integer.parseInt(request.getParameter("COURSEID")));
+"DELETE FROM COURSEENROLLMENT WHERE ENROLLMENTID = ?");
+pstmt.setInt(1,Integer.parseInt(request.getParameter("ENROLLMENTID")));
 int rowCount = pstmt.executeUpdate();
 connection.setAutoCommit(false);
 connection.setAutoCommit(true);
@@ -112,30 +94,26 @@ connection.setAutoCommit(true);
                     // Use the statement to SELECT the student attributes
                     // FROM the Student table.
                     out.println("Connected to the PostgreSQL server successfully.");
-                    ResultSet rs = statement.executeQuery("SELECT * FROM COURSE");
+                    ResultSet rs = statement.executeQuery("SELECT * FROM COURSEENROLLMENT");
                     %>
 <%
 // Iterate over the ResultSet
 while ( rs.next() ) {
 %>
 <tr>
-<form action="courses.jsp" method="get">
+<form action="courseenrollments.jsp" method="get">
 <input type="hidden" value="update" name="action">
+<td><input value="<%= rs.getInt("ENROLLMENTID") %>" name="ENROLLMENTID"></td>
+<td><input value="<%= rs.getInt("STUDENTID") %>" name="STUDENTID"></td>
 <td><input value="<%= rs.getInt("COURSEID") %>" name="COURSEID"></td>
-<td><input value="<%= rs.getString("COURSENUMBER") %>" name="COURSENUMBER"></td>
-<td><input value="<%= rs.getString("UNIT") %>" name="UNIT"></td>
-<td><input value="<%= rs.getString("GRADESTATUS") %>" name="GRADESTATUS"></td>
-<td><input value="<%= rs.getString("PREREQUISITES") %>" name="PREREQUISITES"></td>
-<td><input value="<%= rs.getString("GENERALTOPIC") %>" name="GENERALTOPIC"></td>
-<td><input value="<%= rs.getString("INSTRUCTORCONSENT") %>" name="INSTRUCTORCONSENT"></td>
-<td><input value="<%= rs.getString("ISREQUIREDLABWORK") %>" name="ISREQUIREDLABWORK"></td>
-<td><input value="<%= rs.getString("ISLOWER") %>" name="ISLOWER"></td>
+<td><input value="<%= rs.getInt("SECTIONID") %>" name="SECTIONID"></td>
+<td><input value="<%= rs.getInt("unit") %>" name="unit"></td>
 <td><input type="submit" value="Update"></td>
 </form>
-<form action="courses.jsp" method="get">
+<form action="courseenrollments.jsp" method="get">
 <input type="hidden" value="delete" name="action">
-<input type="hidden" value="<%= rs.getInt("COURSEID") %>"
-name="COURSEID">
+<input type="hidden" value="<%= rs.getInt("ENROLLMENTID") %>"
+name="ENROLLMENTID">
 <td><input type="submit" value="Delete"></td>
 </form>
 </tr>

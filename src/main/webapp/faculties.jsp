@@ -21,24 +21,16 @@
                 %>
                 <table>
                 <tr>
-                <th>SSN</th>
-                <th>StudentId</th>
-                <th>First Name</th>
-                <th>Middle Name</th>
-                <th>Last Name</th>
-                <th>Enrolled</th>
-                <th>Citizenship</th>
+                <th>FACULTYNAME</th>
+                <th>TITLE</th>
+                <th>DEPARTMENT</th>
                 </tr>
                 <tr>
-                <form action="students.jsp" method="get">
+                <form action="faculties.jsp" method="get">
                 <input type="hidden" value="insert" name="action">
-                <th><input value="" name="SSN" size="10"></th>
-                <th><input value="" name="STUDENTID" size="10"></th>
-                <th><input value="" name="FIRSTNAME" size="15"></th>
-                <th><input value="" name="MIDDLENAME" size="15"></th>
-                <th><input value="" name="LASTNAME" size="15"></th>
-                <th><input value="" name="ENROLLED" size="15"></th>
-                <th><input value="" name="CITIZENSHIP" size="15"></th>
+                <th><input value="" name="FACULTYNAME" size="10"></th>
+                <th><input value="" name="TITLE" size="10"></th>
+                <th><input value="" name="DEPARTMENT" size="15"></th>
                 <th><input type="submit" value="Insert"></th>
                 </form>
                 </tr>
@@ -50,14 +42,10 @@
                 // Create the prepared statement and use it to
                 // INSERT the student attrs INTO the Student table.
                 PreparedStatement pstmt = connection.prepareStatement(
-                ("INSERT INTO Student VALUES (?, ?, ?, ?, ?, ?, ?)"));
-                pstmt.setString(1, request.getParameter("STUDENTID"));
-                pstmt.setInt(2,Integer.parseInt(request.getParameter("SSN")));
-                pstmt.setString(3, request.getParameter("FIRSTNAME"));
-                pstmt.setString(4, request.getParameter("MIDDLENAME"));
-                pstmt.setString(5, request.getParameter("LASTNAME"));
-                pstmt.setInt(6, Integer.parseInt(request.getParameter("ENROLLED")));
-                pstmt.setInt(7, Integer.parseInt(request.getParameter("CITIZENSHIP")));
+                ("INSERT INTO FACULTY VALUES (?, ?, ?)"));
+                pstmt.setString(1, request.getParameter("FACULTYNAME"));
+                pstmt.setString(2, request.getParameter("TITLE"));
+                pstmt.setString(3, request.getParameter("DEPARTMENT"));
                 pstmt.executeUpdate();
                 connection.commit();
                 connection.setAutoCommit(true);
@@ -70,15 +58,10 @@ connection.setAutoCommit(false);
 // Create the prepared statement and use it to
 // UPDATE the student attributes in the Student table.
 PreparedStatement pstatement = connection.prepareStatement(
-"UPDATE Student SET CITIZENSHIP = ?,SSN = ?, FIRSTNAME = ?, MIDDLENAME = ?," +
-"LASTNAME = ?, ENROLLED = ? WHERE STUDENTID = ?");
-pstatement.setInt(1, Integer.parseInt(request.getParameter("CITIZENSHIP")));
-pstatement.setInt(2,Integer.parseInt(request.getParameter("SSN")));
-pstatement.setString(3, request.getParameter("FIRSTNAME"));
-pstatement.setString(4, request.getParameter("MIDDLENAME"));
-pstatement.setString(5, request.getParameter("LASTNAME"));
-pstatement.setInt(6, Integer.parseInt(request.getParameter("ENROLLED")));
-pstatement.setString(7, request.getParameter("STUDENTID"));
+"UPDATE FACULTY SET TITLE = ?, DEPARTMENT = ? WHERE FACULTYNAME = ?");
+pstatement.setString(1, request.getParameter("TITLE"));
+pstatement.setString(2, request.getParameter("DEPARTMENT"));
+pstatement.setString(3, request.getParameter("FACULTYNAME"));
 int rowCount = pstatement.executeUpdate();
 connection.setAutoCommit(false);
 connection.setAutoCommit(true);
@@ -89,8 +72,8 @@ connection.setAutoCommit(false);
 // Create the prepared statement and use it to
 // DELETE the student FROM the Student table.
 PreparedStatement pstmt = connection.prepareStatement(
-"DELETE FROM Student WHERE STUDENTID = ?");
-pstmt.setString(1,request.getParameter("STUDENTID"));
+"DELETE FROM FACULTY WHERE FACULTYNAME = ?");
+pstmt.setString(1,request.getParameter("FACULTYNAME"));
 int rowCount = pstmt.executeUpdate();
 connection.setAutoCommit(false);
 connection.setAutoCommit(true);
@@ -103,28 +86,24 @@ connection.setAutoCommit(true);
                     // Use the statement to SELECT the student attributes
                     // FROM the Student table.
                     out.println("Connected to the PostgreSQL server successfully.");
-                    ResultSet rs = statement.executeQuery("SELECT * FROM Student");
+                    ResultSet rs = statement.executeQuery("SELECT * FROM FACULTY");
                     %>
 <%
 // Iterate over the ResultSet
 while ( rs.next() ) {
 %>
 <tr>
-<form action="students.jsp" method="get">
+<form action="faculties.jsp" method="get">
 <input type="hidden" value="update" name="action">
-<td><input value="<%= rs.getInt("SSN") %>" name="SSN"></td>
-<td><input value="<%= rs.getString("STUDENTID") %>" name="STUDENTID"></td>
-<td><input value="<%= rs.getString("FIRSTNAME") %>" name="FIRSTNAME"></td>
-<td><input value="<%= rs.getString("MIDDLENAME") %>" name="MIDDLENAME"></td>
-<td><input value="<%= rs.getString("LASTNAME") %>" name="LASTNAME"></td>
-<td><input value="<%= rs.getString("ENROLLED") %>" name="ENROLLED"></td>
-<td><input value="<%= rs.getString("CITIZENSHIP") %>" name="CITIZENSHIP"></td>
+<td><input value="<%= rs.getString("FACULTYNAME") %>" name="FACULTYNAME"></td>
+<td><input value="<%= rs.getString("TITLE") %>" name="TITLE"></td>
+<td><input value="<%= rs.getString("DEPARTMENT") %>" name="DEPARTMENT"></td>
 <td><input type="submit" value="Update"></td>
 </form>
-<form action="students.jsp" method="get">
+<form action="faculties.jsp" method="get">
 <input type="hidden" value="delete" name="action">
-<input type="hidden" value="<%= rs.getString("STUDENTID") %>"
-name="STUDENTID">
+<input type="hidden" value="<%= rs.getString("FACULTYNAME") %>"
+name="FACULTYNAME">
 <td><input type="submit" value="Delete"></td>
 </form>
 </tr>

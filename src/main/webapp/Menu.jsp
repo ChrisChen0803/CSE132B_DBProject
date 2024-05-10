@@ -10,5 +10,12 @@
 <li>
 <a href="students.jsp">Students<a>
 </li>
+<li>
+<a href="thesis.jsp">Thesis<a>
+</li>
+</li>
+<li>
+<a href="probation.jsp">Thesis<a>
+</li>
 </ul>
 </html>

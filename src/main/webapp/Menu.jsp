@@ -17,5 +17,11 @@
 <li>
 <a href="probation.jsp">Thesis<a>
 </li>
+<li>
+<a href="reviewsection.jsp">Thesis<a>
+</li>
+<li>
+<a href="degreerequirements.jsp">Thesis<a>
+</li>
 </ul>
 </html>

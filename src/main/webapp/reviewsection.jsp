@@ -54,8 +54,8 @@
                     // INSERT the student attrs INTO the Student table.
                     PreparedStatement pstmt = connection.prepareStatement(
                     ("INSERT INTO REVIEW_SECTION VALUES (?, ?, ?, ?, ?)"));
-                    pstmt.setInt(1, Integer.parseInt(request.getParameter("COURSEID")));
-                    pstmt.setInt(2, Integer.parseInt(request.getParameter("SECTIONID")));
+                    pstmt.setString(1, request.getParameter("COURSEID"));
+                    pstmt.setString(2, request.getParameter("SECTIONID"));
                     pstmt.setTimestamp(3, startDate); // Use setDate for TIME
                     pstmt.setTimestamp(4, endDate);   // Use setDate for TIME
                     pstmt.setString(5, request.getParameter("BUILDING"));
@@ -80,8 +80,8 @@
         pstatement.setString(1, request.getParameter("BUILDING"));
         pstatement.setTimestamp(2, startDate);
         pstatement.setTimestamp(3, endDate);
-        pstatement.setInt(4, Integer.parseInt(request.getParameter("COURSEID")));
-        pstatement.setInt(5, Integer.parseInt(request.getParameter("SECTIONID")));
+        pstatement.setString(4, request.getParameter("COURSEID"));
+        pstatement.setString(5, request.getParameter("SECTIONID"));
         int rowCount = pstatement.executeUpdate();
         connection.setAutoCommit(false);
         connection.setAutoCommit(true);
@@ -93,8 +93,8 @@
         // DELETE the student FROM the Student table.
         PreparedStatement pstmt = connection.prepareStatement(
         "DELETE FROM Review_Section WHERE COURSEID = ? AND SECTIONID = ?");
-        pstmt.setInt(1, Integer.parseInt(request.getParameter("COURSEID")));
-        pstmt.setInt(2, Integer.parseInt(request.getParameter("SECTIONID")));
+        pstmt.setString(1, request.getParameter("COURSEID"));
+        pstmt.setString(2, request.getParameter("SECTIONID"));
         int rowCount = pstmt.executeUpdate();
         connection.setAutoCommit(false);
         connection.setAutoCommit(true);
@@ -134,8 +134,8 @@ while ( rs.next() ) {
 <tr>
     <form action="reviewsection.jsp" method="get">
         <input type="hidden" value="update" name="action">
-        <td><input value="<%= rs.getInt("COURSEID") %>" name="COURSEID"></td>
-        <td><input value="<%= rs.getInt("SECTIONID") %>" name="SECTIONID"></td>
+        <td><input value="<%= rs.getString("COURSEID") %>" name="COURSEID"></td>
+        <td><input value="<%= rs.getString("SECTIONID") %>" name="SECTIONID"></td>
         <td><input value="<%= startDateStr %>" name="STARTTIME"></td>
         <td><input value="<%= endDateStr %>" name="ENDTIME"></td>
         <td><input value="<%= rs.getString("BUILDING") %>" name="BUILDING"></td>
@@ -143,9 +143,9 @@ while ( rs.next() ) {
     </form>
     <form action="reviewsection.jsp" method="get">
         <input type="hidden" value="delete" name="action">
-        <input type="hidden" value="<%= rs.getInt("COURSEID") %>"
+        <input type="hidden" value="<%= rs.getString("COURSEID") %>"
         name="COURSEID">
-        <input type="hidden" value="<%= rs.getInt("SECTIONID") %>"
+        <input type="hidden" value="<%= rs.getString("SECTIONID") %>"
         name="SECTIONID">
         <td><input type="submit" value="Delete"></td>
     </form>

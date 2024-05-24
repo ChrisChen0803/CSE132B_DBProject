@@ -21,9 +21,9 @@
                 %>
                 <table>
                 <tr>
-                <th>COMMITTEEID</th>
                 <th>STUDENTID</th>
                 <th>ADVISORID</th>
+                <th>TOPIC</th>
                 </tr>
                 <tr>
                 <form action="thesis.jsp" method="get">
@@ -45,7 +45,7 @@
                 ("INSERT INTO THESIS VALUES (?, ?, ?)"));
                 pstmt.setString(1, request.getParameter("STUDENTID"));
                 pstmt.setString(2, request.getParameter("ADVISORID"));
-                pstmt.setString(2, request.getParameter("TOPIC"));
+                pstmt.setString(3, request.getParameter("TOPIC"));
                 pstmt.executeUpdate();
                 connection.commit();
                 connection.setAutoCommit(true);
@@ -96,9 +96,9 @@ while ( rs.next() ) {
 <tr>
 <form action="thesis.jsp" method="get">
 <input type="hidden" value="update" name="action">
-<td><input value="<%= rs.getString("COMMITTEEID") %>" name="COMMITTEEID"></td>
 <td><input value="<%= rs.getString("STUDENTID") %>" name="STUDENTID"></td>
 <td><input value="<%= rs.getString("ADVISORID") %>" name="ADVISORID"></td>
+<td><input value="<%= rs.getString("TOPIC") %>" name="TOPIC"></td>
 <td><input type="submit" value="Update"></td>
 </form>
 <form action="thesis.jsp" method="get">

@@ -47,7 +47,7 @@
                 // INSERT the student attrs INTO the Student table.
                 PreparedStatement pstmt = connection.prepareStatement(
                 ("INSERT INTO COURSEENROLLMENT VALUES (?, ?, ?, ?, ?)"));
-                pstmt.setInt(1, Integer.parseInt(request.getParameter("STUDENTID")));
+                pstmt.setString(1, request.getParameter("STUDENTID"));
                 pstmt.setString(2, request.getParameter("COURSEID"));
                 pstmt.setString(3, request.getParameter("SECTIONID"));
                 pstmt.setInt(4, Integer.parseInt(request.getParameter("unit")));
@@ -67,7 +67,7 @@ PreparedStatement pstatement = connection.prepareStatement(
 "UPDATE COURSEENROLLMENT SET unit = ?, GRADEOPTION = ? WHERE STUDENTID = ? AND COURSEID = ? AND SECTIONID = ?");
 pstatement.setInt(1, Integer.parseInt(request.getParameter("unit")));
 pstatement.setInt(2, Integer.parseInt(request.getParameter("GRADEOPTION")));
-pstatement.setInt(3, Integer.parseInt(request.getParameter("STUDENTID")));
+pstatement.setString(3, request.getParameter("STUDENTID"));
 pstatement.setString(4, request.getParameter("COURSEID"));
 pstatement.setString(5, request.getParameter("SECTIONID"));
 int rowCount = pstatement.executeUpdate();
@@ -81,7 +81,7 @@ connection.setAutoCommit(false);
 // DELETE the student FROM the Student table.
 PreparedStatement pstmt = connection.prepareStatement(
 "DELETE FROM COURSEENROLLMENT WHERE STUDENTID = ? AND COURSEID = ? AND SECTIONID = ?");
-pstmt.setInt(1, Integer.parseInt(request.getParameter("STUDENTID")));
+pstmt.setString(1, request.getParameter("STUDENTID"));
 pstmt.setString(2, request.getParameter("COURSEID"));
 pstmt.setString(3, request.getParameter("SECTIONID"));
 int rowCount = pstmt.executeUpdate();
@@ -105,7 +105,7 @@ while ( rs.next() ) {
 <tr>
 <form action="courseenrollments.jsp" method="get">
 <input type="hidden" value="update" name="action">
-<td><input value="<%= rs.getInt("STUDENTID") %>" name="STUDENTID"></td>
+<td><input value="<%= rs.getString("STUDENTID") %>" name="STUDENTID"></td>
 <td><input value="<%= rs.getString("COURSEID") %>" name="COURSEID"></td>
 <td><input value="<%= rs.getString("SECTIONID") %>" name="SECTIONID"></td>
 <td><input value="<%= rs.getInt("unit") %>" name="unit"></td>

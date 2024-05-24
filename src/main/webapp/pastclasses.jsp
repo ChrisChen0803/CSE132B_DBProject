@@ -21,7 +21,6 @@
                 %>
                 <table>
                 <tr>
-                <th>PASTID</th>
                 <th>STUDENTID</th>
                 <th>COURSEID</th>
                 <th>SECTIONID</th>
@@ -33,7 +32,6 @@
                 <tr>
                 <form action="pastclasses.jsp" method="get">
                 <input type="hidden" value="insert" name="action">
-                <th><input value="" name="PASTID" size="10"></th>
                 <th><input value="" name="STUDENTID" size="10"></th>
                 <th><input value="" name="COURSEID" size="10"></th>
                 <th><input value="" name="SECTIONID" size="10"></th>
@@ -54,8 +52,8 @@
                 PreparedStatement pstmt = connection.prepareStatement(
                 ("INSERT INTO PASTCLASSES VALUES (?, ?, ?, ?, ?, ?, ?)"));
                 pstmt.setString(1, request.getParameter("STUDENTID"));
-                pstmt.setInt(2, Integer.parseInt(request.getParameter("COURSEID")));
-                pstmt.setInt(3, Integer.parseInt(request.getParameter("SECTIONID")));
+                pstmt.setString(2, request.getParameter("COURSEID"));
+                pstmt.setString(3, request.getParameter("SECTIONID"));
                 pstmt.setString(4, request.getParameter("QUARTER"));
                 pstmt.setInt(5, Integer.parseInt(request.getParameter("YEAR")));
                 pstmt.setInt(6, Integer.parseInt(request.getParameter("unit")));
@@ -75,7 +73,7 @@ PreparedStatement pstatement = connection.prepareStatement(
 "UPDATE PASTCLASSES SET unit = ?, GRADEOPTION = ? WHERE STUDENTID = ? AND COURSEID = ? AND SECTIONID = ? AND QUARTER = ? AND YEAR = ? ");
 pstatement.setInt(1, Integer.parseInt(request.getParameter("unit")));
 pstatement.setInt(2, Integer.parseInt(request.getParameter("GRADEOPTION")));
-pstatement.setInt(3, Integer.parseInt(request.getParameter("STUDENTID")));
+pstatement.setString(3, request.getParameter("STUDENTID"));
 pstatement.setString(4, request.getParameter("COURSEID"));
 pstatement.setString(5, request.getParameter("SECTIONID"));
 pstatement.setString(6, request.getParameter("QUARTER"));
@@ -91,12 +89,11 @@ connection.setAutoCommit(false);
 // DELETE the student FROM the Student table.
 PreparedStatement pstmt = connection.prepareStatement(
 "DELETE FROM PASTCLASSES WHERE STUDENTID = ? AND COURSEID = ? AND SECTIONID = ? AND QUARTER = ? AND YEAR = ?");
-pstmt.setInt(1,Integer.parseInt(request.getParameter("PASTID")));
-pstatement.setInt(2, Integer.parseInt(request.getParameter("STUDENTID")));
-pstatement.setString(3, request.getParameter("COURSEID"));
-pstatement.setString(4, request.getParameter("SECTIONID"));
-pstatement.setString(5, request.getParameter("QUARTER"));
-pstatement.setInt(6, Integer.parseInt(request.getParameter("YEAR")));
+pstatement.setString(1, request.getParameter("STUDENTID"));
+pstatement.setString(2, request.getParameter("COURSEID"));
+pstatement.setString(3, request.getParameter("SECTIONID"));
+pstatement.setString(4, request.getParameter("QUARTER"));
+pstatement.setInt(5, Integer.parseInt(request.getParameter("YEAR")));
 int rowCount = pstmt.executeUpdate();
 connection.setAutoCommit(false);
 connection.setAutoCommit(true);
@@ -118,9 +115,9 @@ while ( rs.next() ) {
 <tr>
 <form action="pastclasses.jsp" method="get">
 <input type="hidden" value="update" name="action">
-<td><input value="<%= rs.getInt("STUDENTID") %>" name="STUDENTID"></td>
-<td><input value="<%= rs.getInt("COURSEID") %>" name="COURSEID"></td>
-<td><input value="<%= rs.getInt("SECTIONID") %>" name="SECTIONID"></td>
+<td><input value="<%= rs.getString("STUDENTID") %>" name="STUDENTID"></td>
+<td><input value="<%= rs.getString("COURSEID") %>" name="COURSEID"></td>
+<td><input value="<%= rs.getString("SECTIONID") %>" name="SECTIONID"></td>
 <td><input value="<%= rs.getString("QUARTER") %>" name="QUARTER"></td>
 <td><input value="<%= rs.getInt("YEAR") %>" name="YEAR"></td>
 <td><input value="<%= rs.getInt("unit") %>" name="unit"></td>
@@ -129,9 +126,9 @@ while ( rs.next() ) {
 </form>
 <form action="pastclasses.jsp" method="get">
 <input type="hidden" value="delete" name="action">
-<input type="hidden" value="<%= rs.getInt("STUDENTID") %>" name="STUDENTID"></td>
-<input type="hidden" value="<%= rs.getInt("COURSEID") %>" name="COURSEID"></td>
-<input type="hidden" value="<%= rs.getInt("SECTIONID") %>" name="SECTIONID"></td>
+<input type="hidden" value="<%= rs.getString("STUDENTID") %>" name="STUDENTID"></td>
+<input type="hidden" value="<%= rs.getString("COURSEID") %>" name="COURSEID"></td>
+<input type="hidden" value="<%= rs.getString("SECTIONID") %>" name="SECTIONID"></td>
 <input type="hidden" value="<%= rs.getString("QUARTER") %>" name="QUARTER"></td>
 <input type="hidden" value="<%= rs.getInt("YEAR") %>" name="YEAR"></td>
 

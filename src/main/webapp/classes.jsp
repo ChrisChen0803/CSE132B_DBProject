@@ -45,7 +45,7 @@
                 // INSERT the student attrs INTO the Student table.
                 PreparedStatement pstmt = connection.prepareStatement(
                 ("INSERT INTO CLASS VALUES (?, ?, ?, ?)"));
-                pstmt.setInt(1,Integer.parseInt(request.getParameter("COURSEID")));
+                pstmt.setString(1,request.getParameter("COURSEID"));
                 pstmt.setString(2, request.getParameter("COURSETITLE"));
                 pstmt.setString(3, request.getParameter("QUARTER"));
                 pstmt.setInt(4, Integer.parseInt(request.getParameter("YEAR")));
@@ -65,7 +65,7 @@ PreparedStatement pstatement = connection.prepareStatement(
 pstatement.setInt(1,Integer.parseInt(request.getParameter("YEAR")));
 pstatement.setString(2, request.getParameter("COURSETITLE"));
 pstatement.setString(3, request.getParameter("QUARTER"));
-pstatement.setInt(4,Integer.parseInt(request.getParameter("COURSEID")));
+pstatement.setString(4,request.getParameter("COURSEID"));
 int rowCount = pstatement.executeUpdate();
 connection.setAutoCommit(false);
 connection.setAutoCommit(true);
@@ -77,7 +77,7 @@ connection.setAutoCommit(false);
 // DELETE the student FROM the Student table.
 PreparedStatement pstmt = connection.prepareStatement(
 "DELETE FROM CLASS WHERE COURSEID = ?");
-pstmt.setInt(1,Integer.parseInt(request.getParameter("COURSEID")));
+pstmt.setString(1,request.getParameter("COURSEID"));
 int rowCount = pstmt.executeUpdate();
 connection.setAutoCommit(false);
 connection.setAutoCommit(true);
@@ -99,10 +99,10 @@ while ( rs.next() ) {
 <tr>
 <form action="classes.jsp" method="get">
 <input type="hidden" value="update" name="action">
-<td><input value="<%= rs.getInt("COURSEID") %>" name="COURSEID"></td>
+<td><input value="<%= rs.getString("COURSEID") %>" name="COURSEID"></td>
 <td><input value="<%= rs.getString("COURSETITLE") %>" name="COURSETITLE"></td>
 <td><input value="<%= rs.getString("QUARTER") %>" name="QUARTER"></td>
-<td><input value="<%= rs.getString("YEAR") %>" name="YEAR"></td>
+<td><input value="<%= rs.getInt("YEAR") %>" name="YEAR"></td>
 <td><input type="submit" value="Update"></td>
 </form>
 <form action="classes.jsp" method="get">

@@ -21,20 +21,20 @@
                 %>
                 <table>
                 <tr>
-                <th>ENROLLMENTID</th>
                 <th>STUDENTID</th>
                 <th>COURSEID</th>
                 <th>SECTIONID</th>
                 <th>unit</th>
+                <th>GRADEOPTION</th>
                 </tr>
                 <tr>
                 <form action="courseenrollments.jsp" method="get">
                 <input type="hidden" value="insert" name="action">
-                <th><input value="" name="ENROLLMENTID" size="10"></th>
                 <th><input value="" name="STUDENTID" size="10"></th>
                 <th><input value="" name="COURSEID" size="10"></th>
                 <th><input value="" name="SECTIONID" size="10"></th>
                 <th><input value="" name="unit" size="15"></th>
+                <th><input value="" name="GRADEOPTION" size="10"></th>
                 <th><input type="submit" value="Insert"></th>
                 </form>
                 </tr>
@@ -47,11 +47,11 @@
                 // INSERT the student attrs INTO the Student table.
                 PreparedStatement pstmt = connection.prepareStatement(
                 ("INSERT INTO COURSEENROLLMENT VALUES (?, ?, ?, ?, ?)"));
-                pstmt.setInt(1, Integer.parseInt(request.getParameter("ENROLLMENTID")));
-                pstmt.setInt(2, Integer.parseInt(request.getParameter("STUDENTID")));
-                pstmt.setInt(3, Integer.parseInt(request.getParameter("COURSEID")));
-                pstmt.setInt(4, Integer.parseInt(request.getParameter("SECTIONID")));
-                pstmt.setInt(5, Integer.parseInt(request.getParameter("unit")));
+                pstmt.setInt(1, Integer.parseInt(request.getParameter("STUDENTID")));
+                pstmt.setString(2, request.getParameter("COURSEID"));
+                pstmt.setString(3, request.getParameter("SECTIONID"));
+                pstmt.setInt(4, Integer.parseInt(request.getParameter("unit")));
+                pstmt.setInt(5, Integer.parseInt(request.getParameter("GRADEOPTION")));
                 pstmt.executeUpdate();
                 connection.commit();
                 connection.setAutoCommit(true);
@@ -64,12 +64,12 @@ connection.setAutoCommit(false);
 // Create the prepared statement and use it to
 // UPDATE the student attributes in the Student table.
 PreparedStatement pstatement = connection.prepareStatement(
-"UPDATE COURSEENROLLMENT SET STUDENTID = ?, COURSEID = ?, SECTIONID = ?, unit = ? WHERE ENROLLMENTID=? ");
-pstatement.setInt(1, Integer.parseInt(request.getParameter("STUDENTID")));
-pstatement.setInt(2, Integer.parseInt(request.getParameter("COURSEID")));
-pstatement.setInt(3, Integer.parseInt(request.getParameter("SECTIONID")));
-pstatement.setInt(4, Integer.parseInt(request.getParameter("unit")));
-pstatement.setInt(5, Integer.parseInt(request.getParameter("ENROLLMENTID")));
+"UPDATE COURSEENROLLMENT SET unit = ?, GRADEOPTION = ? WHERE STUDENTID = ? AND COURSEID = ? AND SECTIONID = ?");
+pstatement.setInt(1, Integer.parseInt(request.getParameter("unit")));
+pstatement.setInt(2, Integer.parseInt(request.getParameter("GRADEOPTION")));
+pstatement.setInt(3, Integer.parseInt(request.getParameter("STUDENTID")));
+pstatement.setString(4, request.getParameter("COURSEID"));
+pstatement.setString(5, request.getParameter("SECTIONID"));
 int rowCount = pstatement.executeUpdate();
 connection.setAutoCommit(false);
 connection.setAutoCommit(true);
@@ -80,8 +80,10 @@ connection.setAutoCommit(false);
 // Create the prepared statement and use it to
 // DELETE the student FROM the Student table.
 PreparedStatement pstmt = connection.prepareStatement(
-"DELETE FROM COURSEENROLLMENT WHERE ENROLLMENTID = ?");
-pstmt.setInt(1,Integer.parseInt(request.getParameter("ENROLLMENTID")));
+"DELETE FROM COURSEENROLLMENT WHERE STUDENTID = ? AND COURSEID = ? AND SECTIONID = ?");
+pstmt.setInt(1, Integer.parseInt(request.getParameter("STUDENTID")));
+pstmt.setString(2, request.getParameter("COURSEID"));
+pstmt.setString(3, request.getParameter("SECTIONID"));
 int rowCount = pstmt.executeUpdate();
 connection.setAutoCommit(false);
 connection.setAutoCommit(true);
@@ -103,11 +105,11 @@ while ( rs.next() ) {
 <tr>
 <form action="courseenrollments.jsp" method="get">
 <input type="hidden" value="update" name="action">
-<td><input value="<%= rs.getInt("ENROLLMENTID") %>" name="ENROLLMENTID"></td>
 <td><input value="<%= rs.getInt("STUDENTID") %>" name="STUDENTID"></td>
-<td><input value="<%= rs.getInt("COURSEID") %>" name="COURSEID"></td>
-<td><input value="<%= rs.getInt("SECTIONID") %>" name="SECTIONID"></td>
+<td><input value="<%= rs.getString("COURSEID") %>" name="COURSEID"></td>
+<td><input value="<%= rs.getString("SECTIONID") %>" name="SECTIONID"></td>
 <td><input value="<%= rs.getInt("unit") %>" name="unit"></td>
+<td><input value="<%= rs.getInt("GRADEOPTION") %>" name="unit"></td>
 <td><input type="submit" value="Update"></td>
 </form>
 <form action="courseenrollments.jsp" method="get">

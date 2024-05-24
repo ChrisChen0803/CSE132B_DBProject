@@ -28,6 +28,7 @@
                 <th>Quarter</th>
                 <th>Year</th>
                 <th>unit</th>
+                <th>GRADEOPTION</th>
                 </tr>
                 <tr>
                 <form action="pastclasses.jsp" method="get">
@@ -39,6 +40,7 @@
                 <th><input value="" name="QUARTER" size="10"></th>
                 <th><input value="" name="YEAR" size="10"></th>
                 <th><input value="" name="unit" size="15"></th>
+                <th><input value="" name="GRADEOPTION" size="10"></th>
                 <th><input type="submit" value="Insert"></th>
                 </form>
                 </tr>
@@ -51,13 +53,13 @@
                 // INSERT the student attrs INTO the Student table.
                 PreparedStatement pstmt = connection.prepareStatement(
                 ("INSERT INTO PASTCLASSES VALUES (?, ?, ?, ?, ?, ?, ?)"));
-                pstmt.setInt(1, Integer.parseInt(request.getParameter("PASTID")));
-                pstmt.setInt(2, Integer.parseInt(request.getParameter("STUDENTID")));
-                pstmt.setInt(3, Integer.parseInt(request.getParameter("COURSEID")));
-                pstmt.setInt(4, Integer.parseInt(request.getParameter("SECTIONID")));
-                pstmt.setString(5, request.getParameter("QUARTER"));
-                pstmt.setInt(6, Integer.parseInt(request.getParameter("YEAR")));
-                pstmt.setInt(7, Integer.parseInt(request.getParameter("unit")));
+                pstmt.setString(1, request.getParameter("STUDENTID"));
+                pstmt.setInt(2, Integer.parseInt(request.getParameter("COURSEID")));
+                pstmt.setInt(3, Integer.parseInt(request.getParameter("SECTIONID")));
+                pstmt.setString(4, request.getParameter("QUARTER"));
+                pstmt.setInt(5, Integer.parseInt(request.getParameter("YEAR")));
+                pstmt.setInt(6, Integer.parseInt(request.getParameter("unit")));
+                pstmt.setInt(7, Integer.parseInt(request.getParameter("GRADEOPTION")));
                 pstmt.executeUpdate();
                 connection.commit();
                 connection.setAutoCommit(true);
@@ -70,14 +72,14 @@ connection.setAutoCommit(false);
 // Create the prepared statement and use it to
 // UPDATE the student attributes in the Student table.
 PreparedStatement pstatement = connection.prepareStatement(
-"UPDATE PASTCLASSES SET STUDENTID = ?, COURSEID = ?, SECTIONID = ?,QUARTER = ?, YEAR = ?, unit = ? WHERE PASTID=? ");
-pstatement.setInt(1, Integer.parseInt(request.getParameter("STUDENTID")));
-pstatement.setInt(2, Integer.parseInt(request.getParameter("COURSEID")));
-pstatement.setInt(3, Integer.parseInt(request.getParameter("SECTIONID")));
-pstatement.setString(4, request.getParameter("QUARTER"));
-pstatement.setInt(5, Integer.parseInt(request.getParameter("YEAR")));
-pstatement.setInt(6, Integer.parseInt(request.getParameter("unit")));
-pstatement.setInt(7, Integer.parseInt(request.getParameter("PASTID")));
+"UPDATE PASTCLASSES SET unit = ?, GRADEOPTION = ? WHERE STUDENTID = ? AND COURSEID = ? AND SECTIONID = ? AND QUARTER = ? AND YEAR = ? ");
+pstatement.setInt(1, Integer.parseInt(request.getParameter("unit")));
+pstatement.setInt(2, Integer.parseInt(request.getParameter("GRADEOPTION")));
+pstatement.setInt(3, Integer.parseInt(request.getParameter("STUDENTID")));
+pstatement.setString(4, request.getParameter("COURSEID"));
+pstatement.setString(5, request.getParameter("SECTIONID"));
+pstatement.setString(6, request.getParameter("QUARTER"));
+pstatement.setInt(7, Integer.parseInt(request.getParameter("YEAR")));
 int rowCount = pstatement.executeUpdate();
 connection.setAutoCommit(false);
 connection.setAutoCommit(true);
@@ -88,8 +90,13 @@ connection.setAutoCommit(false);
 // Create the prepared statement and use it to
 // DELETE the student FROM the Student table.
 PreparedStatement pstmt = connection.prepareStatement(
-"DELETE FROM PASTCLASSES WHERE PASTID = ?");
+"DELETE FROM PASTCLASSES WHERE STUDENTID = ? AND COURSEID = ? AND SECTIONID = ? AND QUARTER = ? AND YEAR = ?");
 pstmt.setInt(1,Integer.parseInt(request.getParameter("PASTID")));
+pstatement.setInt(2, Integer.parseInt(request.getParameter("STUDENTID")));
+pstatement.setString(3, request.getParameter("COURSEID"));
+pstatement.setString(4, request.getParameter("SECTIONID"));
+pstatement.setString(5, request.getParameter("QUARTER"));
+pstatement.setInt(6, Integer.parseInt(request.getParameter("YEAR")));
 int rowCount = pstmt.executeUpdate();
 connection.setAutoCommit(false);
 connection.setAutoCommit(true);
@@ -111,19 +118,23 @@ while ( rs.next() ) {
 <tr>
 <form action="pastclasses.jsp" method="get">
 <input type="hidden" value="update" name="action">
-<td><input value="<%= rs.getInt("PASTID") %>" name="PASTID"></td>
 <td><input value="<%= rs.getInt("STUDENTID") %>" name="STUDENTID"></td>
 <td><input value="<%= rs.getInt("COURSEID") %>" name="COURSEID"></td>
 <td><input value="<%= rs.getInt("SECTIONID") %>" name="SECTIONID"></td>
 <td><input value="<%= rs.getString("QUARTER") %>" name="QUARTER"></td>
 <td><input value="<%= rs.getInt("YEAR") %>" name="YEAR"></td>
 <td><input value="<%= rs.getInt("unit") %>" name="unit"></td>
+<td><input value="<%= rs.getInt("GRADEOPTION") %>" name="SECTIONID"></td>
 <td><input type="submit" value="Update"></td>
 </form>
 <form action="pastclasses.jsp" method="get">
 <input type="hidden" value="delete" name="action">
-<input type="hidden" value="<%= rs.getInt("PASTID") %>"
-name="PASTID">
+<input type="hidden" value="<%= rs.getInt("STUDENTID") %>" name="STUDENTID"></td>
+<input type="hidden" value="<%= rs.getInt("COURSEID") %>" name="COURSEID"></td>
+<input type="hidden" value="<%= rs.getInt("SECTIONID") %>" name="SECTIONID"></td>
+<input type="hidden" value="<%= rs.getString("QUARTER") %>" name="QUARTER"></td>
+<input type="hidden" value="<%= rs.getInt("YEAR") %>" name="YEAR"></td>
+
 <td><input type="submit" value="Delete"></td>
 </form>
 </tr>

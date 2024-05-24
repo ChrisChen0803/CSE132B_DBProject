@@ -28,9 +28,9 @@
                 <tr>
                 <form action="thesis.jsp" method="get">
                 <input type="hidden" value="insert" name="action">
-                <th><input value="" name="COMMITTEEID" size="10"></th>
                 <th><input value="" name="STUDENTID" size="10"></th>
                 <th><input value="" name="ADVISORID" size="10"></th>
+                <th><input value="" name="TOPIC" size="10"></th>
                 <th><input type="submit" value="Insert"></th>
                 </form>
                 </tr>
@@ -43,9 +43,9 @@
                 // INSERT the student attrs INTO the Student table.
                 PreparedStatement pstmt = connection.prepareStatement(
                 ("INSERT INTO THESIS VALUES (?, ?, ?)"));
-                pstmt.setString(1, request.getParameter("COMMITTEEID"));
-                pstmt.setString(2, request.getParameter("STUDENTID"));
-                pstmt.setString(3, request.getParameter("ADVISORID"));
+                pstmt.setString(1, request.getParameter("STUDENTID"));
+                pstmt.setString(2, request.getParameter("ADVISORID"));
+                pstmt.setString(2, request.getParameter("TOPIC"));
                 pstmt.executeUpdate();
                 connection.commit();
                 connection.setAutoCommit(true);
@@ -58,10 +58,10 @@ connection.setAutoCommit(false);
 // Create the prepared statement and use it to
 // UPDATE the student attributes in the Student table.
 PreparedStatement pstatement = connection.prepareStatement(
-"UPDATE THESIS SET ADVISORID = ?, STUDENTID = ? WHERE COMMITTEEID = ?");
-pstatement.setString(1, request.getParameter("ADVISORID"));
-pstatement.setString(2, request.getParameter("STUDENTID"));
-pstatement.setString(3, request.getParameter("COMMITTEEID"));
+"UPDATE THESIS SET TOPIC = ? WHERE ADVISORID = ? AND STUDENTID = ?");
+pstatement.setString(1, request.getParameter("TOPIC"));
+pstatement.setString(2, request.getParameter("ADVISORID"));
+pstatement.setString(3, request.getParameter("STUDENTID"));
 int rowCount = pstatement.executeUpdate();
 connection.setAutoCommit(false);
 connection.setAutoCommit(true);
@@ -72,8 +72,9 @@ connection.setAutoCommit(false);
 // Create the prepared statement and use it to
 // DELETE the student FROM the Student table.
 PreparedStatement pstmt = connection.prepareStatement(
-"DELETE FROM THESIS WHERE COMMITTEEID = ?");
-pstmt.setString(1,request.getParameter("COMMITTEEID"));
+"DELETE FROM THESIS WHERE ADVISORID = ? AND STUDENTID = ?");
+pstmt.setString(1, request.getParameter("ADVISORID"));
+pstmt.setString(2, request.getParameter("STUDENTID"));
 int rowCount = pstmt.executeUpdate();
 connection.setAutoCommit(false);
 connection.setAutoCommit(true);
@@ -102,8 +103,10 @@ while ( rs.next() ) {
 </form>
 <form action="thesis.jsp" method="get">
 <input type="hidden" value="delete" name="action">
-<input type="hidden" value="<%= rs.getString("COMMITTEEID") %>"
-name="COMMITTEEID">
+<input type="hidden" value="<%= rs.getString("STUDENTID") %>"
+name="STUDENTID">
+<input type="hidden" value="<%= rs.getString("ADVISORID") %>"
+name="ADVISORID">
 <td><input type="submit" value="Delete"></td>
 </form>
 </tr>

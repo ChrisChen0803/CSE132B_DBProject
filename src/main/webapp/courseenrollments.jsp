@@ -114,8 +114,12 @@ while ( rs.next() ) {
 </form>
 <form action="courseenrollments.jsp" method="get">
 <input type="hidden" value="delete" name="action">
-<input type="hidden" value="<%= rs.getInt("ENROLLMENTID") %>"
-name="ENROLLMENTID">
+<input type="hidden" value="<%= rs.getString("STUDENTID") %>"
+name="STUDENTID">
+<input type="hidden" value="<%= rs.getString("COURSEID") %>"
+name="COURSEID">
+<input type="hidden" value="<%= rs.getString("SECTIONID") %>"
+name="SECTIONID">
 <td><input type="submit" value="Delete"></td>
 </form>
 </tr>

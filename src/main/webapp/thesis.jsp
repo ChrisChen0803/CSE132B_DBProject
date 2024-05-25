@@ -58,7 +58,7 @@ connection.setAutoCommit(false);
 // Create the prepared statement and use it to
 // UPDATE the student attributes in the Student table.
 PreparedStatement pstatement = connection.prepareStatement(
-"UPDATE THESIS SET TOPIC = ? WHERE ADVISORID = ? AND STUDENTID = ?");
+"UPDATE THESIS SET TOPIC = ?, ADVISORID = ?  WHERE STUDENTID = ?");
 pstatement.setString(1, request.getParameter("TOPIC"));
 pstatement.setString(2, request.getParameter("ADVISORID"));
 pstatement.setString(3, request.getParameter("STUDENTID"));

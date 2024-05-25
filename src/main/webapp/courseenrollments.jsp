@@ -24,6 +24,8 @@
                 <th>STUDENTID</th>
                 <th>COURSEID</th>
                 <th>SECTIONID</th>
+                <th>Quarter</th>
+                <th>Year</th>
                 <th>unit</th>
                 <th>GRADEOPTION</th>
                 </tr>
@@ -33,6 +35,8 @@
                 <th><input value="" name="STUDENTID" size="10"></th>
                 <th><input value="" name="COURSEID" size="10"></th>
                 <th><input value="" name="SECTIONID" size="10"></th>
+                <th><input value="" name="QUARTER" size="10"></th>
+                <th><input value="" name="YEAR" size="10"></th>
                 <th><input value="" name="unit" size="15"></th>
                 <th><input value="" name="GRADEOPTION" size="10"></th>
                 <th><input type="submit" value="Insert"></th>
@@ -46,12 +50,14 @@
                 // Create the prepared statement and use it to
                 // INSERT the student attrs INTO the Student table.
                 PreparedStatement pstmt = connection.prepareStatement(
-                ("INSERT INTO COURSEENROLLMENT VALUES (?, ?, ?, ?, ?)"));
+                ("INSERT INTO COURSEENROLLMENT VALUES (?, ?, ?, ?, ?, ?, ?)"));
                 pstmt.setString(1, request.getParameter("STUDENTID"));
                 pstmt.setString(2, request.getParameter("COURSEID"));
                 pstmt.setString(3, request.getParameter("SECTIONID"));
-                pstmt.setInt(4, Integer.parseInt(request.getParameter("unit")));
-                pstmt.setInt(5, Integer.parseInt(request.getParameter("GRADEOPTION")));
+                pstmt.setString(4, request.getParameter("QUARTER"));
+                pstmt.setInt(5, Integer.parseInt(request.getParameter("YEAR")));
+                pstmt.setInt(6, Integer.parseInt(request.getParameter("unit")));
+                pstmt.setInt(7, Integer.parseInt(request.getParameter("GRADEOPTION")));
                 pstmt.executeUpdate();
                 connection.commit();
                 connection.setAutoCommit(true);
@@ -64,12 +70,14 @@ connection.setAutoCommit(false);
 // Create the prepared statement and use it to
 // UPDATE the student attributes in the Student table.
 PreparedStatement pstatement = connection.prepareStatement(
-"UPDATE COURSEENROLLMENT SET unit = ?, GRADEOPTION = ? WHERE STUDENTID = ? AND COURSEID = ? AND SECTIONID = ?");
+"UPDATE COURSEENROLLMENT SET unit = ?, GRADEOPTION = ?, QUARTER = ?, YEAR = ? WHERE STUDENTID = ? AND COURSEID = ? AND SECTIONID = ?");
 pstatement.setInt(1, Integer.parseInt(request.getParameter("unit")));
 pstatement.setInt(2, Integer.parseInt(request.getParameter("GRADEOPTION")));
-pstatement.setString(3, request.getParameter("STUDENTID"));
-pstatement.setString(4, request.getParameter("COURSEID"));
-pstatement.setString(5, request.getParameter("SECTIONID"));
+pstatement.setString(3, request.getParameter("QUARTER"));
+pstatement.setInt(4, Integer.parseInt(request.getParameter("YEAR")));
+pstatement.setString(5, request.getParameter("STUDENTID"));
+pstatement.setString(6, request.getParameter("COURSEID"));
+pstatement.setString(7, request.getParameter("SECTIONID"));
 int rowCount = pstatement.executeUpdate();
 connection.setAutoCommit(false);
 connection.setAutoCommit(true);
@@ -108,8 +116,10 @@ while ( rs.next() ) {
 <td><input value="<%= rs.getString("STUDENTID") %>" name="STUDENTID"></td>
 <td><input value="<%= rs.getString("COURSEID") %>" name="COURSEID"></td>
 <td><input value="<%= rs.getString("SECTIONID") %>" name="SECTIONID"></td>
+<td><input value="<%= rs.getString("QUARTER") %>" name="QUARTER"></td>
+<td><input value="<%= rs.getInt("YEAR") %>" name="YEAR"></td>
 <td><input value="<%= rs.getInt("unit") %>" name="unit"></td>
-<td><input value="<%= rs.getInt("GRADEOPTION") %>" name="unit"></td>
+<td><input value="<%= rs.getInt("GRADEOPTION") %>" name="GRADEOPTION"></td>
 <td><input type="submit" value="Update"></td>
 </form>
 <form action="courseenrollments.jsp" method="get">

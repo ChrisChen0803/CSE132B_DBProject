@@ -61,11 +61,11 @@ connection.setAutoCommit(false);
 // Create the prepared statement and use it to
 // UPDATE the student attributes in the Student table.
 PreparedStatement pstatement = connection.prepareStatement(
-"UPDATE CLASS SET YEAR = ?,COURSETITLE = ?, QUARTER = ? WHERE COURSEID = ?");
-pstatement.setInt(1,Integer.parseInt(request.getParameter("YEAR")));
-pstatement.setString(2, request.getParameter("COURSETITLE"));
+"UPDATE CLASS SET COURSETITLE = ? WHERE COURSEID = ? AND QUARTER = ? AND YEAR = ?");
+pstatement.setString(1, request.getParameter("COURSETITLE"));
+pstatement.setString(2,request.getParameter("COURSEID"));
 pstatement.setString(3, request.getParameter("QUARTER"));
-pstatement.setString(4,request.getParameter("COURSEID"));
+pstatement.setInt(4,Integer.parseInt(request.getParameter("YEAR")));
 int rowCount = pstatement.executeUpdate();
 connection.setAutoCommit(false);
 connection.setAutoCommit(true);
@@ -76,8 +76,10 @@ connection.setAutoCommit(false);
 // Create the prepared statement and use it to
 // DELETE the student FROM the Student table.
 PreparedStatement pstmt = connection.prepareStatement(
-"DELETE FROM CLASS WHERE COURSEID = ?");
+"DELETE FROM CLASS WHERE COURSEID = ? AND QUARTER = ? AND YEAR = ?");
 pstmt.setString(1,request.getParameter("COURSEID"));
+pstmt.setString(2, request.getParameter("QUARTER"));
+pstmt.setInt(3,Integer.parseInt(request.getParameter("YEAR")));
 int rowCount = pstmt.executeUpdate();
 connection.setAutoCommit(false);
 connection.setAutoCommit(true);
@@ -109,6 +111,10 @@ while ( rs.next() ) {
 <input type="hidden" value="delete" name="action">
 <input type="hidden" value="<%= rs.getString("COURSEID") %>"
 name="COURSEID">
+<input type="hidden" value="<%= rs.getString("QUARTER") %>"
+name="QUARTER">
+<input type="hidden" value="<%= rs.getInt("YEAR") %>"
+name="YEAR">
 <td><input type="submit" value="Delete"></td>
 </form>
 </tr>

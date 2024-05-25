@@ -36,7 +36,7 @@
                 <form action="courses.jsp" method="get">
                 <input type="hidden" value="insert" name="action">
                 <th><input value="" name="COURSEID" size="10"></th>
-                <th><input value="" name="COURSENUMBER" size="10"></th>
+                <th><input value="" name="COURSENAME" size="10"></th>
                 <th><input value="" name="UNIT" size="15"></th>
                 <th><input value="" name="GRADESTATUS" size="15"></th>
                 <th><input value="" name="PREREQUISITES" size="15"></th>
@@ -58,7 +58,7 @@
                 PreparedStatement pstmt = connection.prepareStatement(
                 ("INSERT INTO COURSE VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"));
                 pstmt.setString(1,request.getParameter("COURSEID"));
-                pstmt.setString(2, request.getParameter("COURSENUMBER"));
+                pstmt.setString(2, request.getParameter("COURSENAME"));
                 pstmt.setInt(3,Integer.parseInt(request.getParameter("UNIT")));
                 pstmt.setString(4, request.getParameter("GRADESTATUS"));
                 pstmt.setString(5, request.getParameter("PREREQUISITES"));
@@ -79,10 +79,10 @@ connection.setAutoCommit(false);
 // Create the prepared statement and use it to
 // UPDATE the student attributes in the Student table.
 PreparedStatement pstatement = connection.prepareStatement(
-"UPDATE COURSE SET ISLOWER = ?,COURSENUMBER = ?, UNIT = ?,GRADESTATUS = ?, PREREQUISITES = ?," +
+"UPDATE COURSE SET ISLOWER = ?,COURSENAME = ?, UNIT = ?,GRADESTATUS = ?, PREREQUISITES = ?," +
 "GENERALTOPIC = ?, INSTRUCTORCONSENT = ?,ISREQUIREDLABWORK = ?, DEPARTMENT = ? WHERE COURSEID = ?");
 pstatement.setBoolean(1, Boolean.parseBoolean(request.getParameter("ISLOWER")));
-pstatement.setString(2, request.getParameter("COURSENUMBER"));
+pstatement.setString(2, request.getParameter("COURSENAME"));
 pstatement.setInt(3,Integer.parseInt(request.getParameter("UNIT")));
 pstatement.setString(4, request.getParameter("GRADESTATUS"));
 pstatement.setString(5, request.getParameter("PREREQUISITES"));
@@ -125,8 +125,8 @@ while ( rs.next() ) {
 <tr>
 <form action="courses.jsp" method="get">
 <input type="hidden" value="update" name="action">
-<td><input value="<%= rs.getInt("COURSEID") %>" name="COURSEID"></td>
-<td><input value="<%= rs.getString("COURSENUMBER") %>" name="COURSENUMBER"></td>
+<td><input value="<%= rs.getString("COURSEID") %>" name="COURSEID"></td>
+<td><input value="<%= rs.getString("COURSENAME") %>" name="COURSENAME"></td>
 <td><input value="<%= rs.getString("UNIT") %>" name="UNIT"></td>
 <td><input value="<%= rs.getString("GRADESTATUS") %>" name="GRADESTATUS"></td>
 <td><input value="<%= rs.getString("PREREQUISITES") %>" name="PREREQUISITES"></td>
@@ -134,7 +134,7 @@ while ( rs.next() ) {
 <td><input value="<%= rs.getString("INSTRUCTORCONSENT") %>" name="INSTRUCTORCONSENT"></td>
 <td><input value="<%= rs.getString("ISREQUIREDLABWORK") %>" name="ISREQUIREDLABWORK"></td>
 <td><input value="<%= rs.getString("ISLOWER") %>" name="ISLOWER"></td>
-<td><input value="<%= rs.getString("DEPARTMENT") %>" name="ISLOWER"></td>
+<td><input value="<%= rs.getString("DEPARTMENT") %>" name="DEPARTMENT"></td>
 <td><input type="submit" value="Update"></td>
 </form>
 <form action="courses.jsp" method="get">

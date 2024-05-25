@@ -73,7 +73,7 @@ connection.setAutoCommit(false);
 // Create the prepared statement and use it to
 // UPDATE the student attributes in the Student table.
 PreparedStatement pstatement = connection.prepareStatement(
-"UPDATE PASTCLASS SET unit = ?, GRADEOPTION = ? GRADE = ? WHERE STUDENTID = ? AND COURSEID = ? AND SECTIONID = ? AND QUARTER = ? AND YEAR = ? ");
+"UPDATE PASTCLASS SET unit = ?, GRADEOPTION = ?, GRADE = ? WHERE STUDENTID = ? AND COURSEID = ? AND SECTIONID = ? AND QUARTER = ? AND YEAR = ? ");
 pstatement.setInt(1, Integer.parseInt(request.getParameter("unit")));
 pstatement.setInt(2, Integer.parseInt(request.getParameter("GRADEOPTION")));
 pstatement.setString(3, request.getParameter("GRADE"));
@@ -92,14 +92,14 @@ if (action != null && action.equals("delete")) {
 connection.setAutoCommit(false);
 // Create the prepared statement and use it to
 // DELETE the student FROM the Student table.
-PreparedStatement pstmt = connection.prepareStatement(
+PreparedStatement pstatement = connection.prepareStatement(
 "DELETE FROM PASTCLASS WHERE STUDENTID = ? AND COURSEID = ? AND SECTIONID = ? AND QUARTER = ? AND YEAR = ?");
 pstatement.setString(1, request.getParameter("STUDENTID"));
 pstatement.setString(2, request.getParameter("COURSEID"));
 pstatement.setString(3, request.getParameter("SECTIONID"));
 pstatement.setString(4, request.getParameter("QUARTER"));
 pstatement.setInt(5, Integer.parseInt(request.getParameter("YEAR")));
-int rowCount = pstmt.executeUpdate();
+int rowCount = pstatement.executeUpdate();
 connection.setAutoCommit(false);
 connection.setAutoCommit(true);
 }

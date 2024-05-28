@@ -64,19 +64,19 @@ INSERT INTO STUDENT VALUES ('3', '3', 'CAT', '', 'C', '1', '1', 'BS', 'EE');
 INSERT INTO STUDENT VALUES ('4', '4', 'DOG', '', 'A', '0', '1', 'BS', 'CS');
 
 
-INSERT INTO courseenrollment VALUES ('1', 'CSE100', '1', 'SPRING', 2018, 4, '1');
-INSERT INTO courseenrollment VALUES ('1', 'CSE132A', '2', 'SPRING', 2018, 4, '1');
-INSERT INTO courseenrollment VALUES ('1', 'ECE196', '2', 'SPRING', 2018, 4, '1');
-INSERT INTO courseenrollment VALUES ('2', 'ECE196', '1', 'SPRING', 2018, 4, '1');
-INSERT INTO courseenrollment VALUES ('2', 'CSE132B', '2', 'SPRING', 2018, 4, '1');
-INSERT INTO courseenrollment VALUES ('3', 'CSE132B', '2', 'SPRING', 2018, 4, '1');
+INSERT INTO courseenrollment VALUES ('1', 'CSE100', '1', 'SPRING', 2018, 4, 1, 'IN');
+INSERT INTO courseenrollment VALUES ('1', 'CSE132A', '2', 'SPRING', 2018, 4, 1, 'IN');
+INSERT INTO courseenrollment VALUES ('1', 'ECE196', '2', 'SPRING', 2018, 4, 1, 'IN');
+INSERT INTO courseenrollment VALUES ('2', 'ECE196', '1', 'SPRING', 2018, 4, 1, 'IN');
+INSERT INTO courseenrollment VALUES ('2', 'CSE132B', '2', 'SPRING', 2018, 4, 1, 'IN');
+INSERT INTO courseenrollment VALUES ('3', 'CSE132B', '2', 'SPRING', 2018, 4, 1, 'IN');
 
-INSERT INTO pastclass VALUES ('1', 'CSE21', '1', 'WINTER', 2018, 4, 4.0);
-INSERT INTO pastclass VALUES ('2', 'CSE21', '2', 'FALL', 2017, 4, 3.7);
-INSERT INTO pastclass VALUES ('2', 'CSE100', '2', 'FALL', 2017, 4, 4.0);
-INSERT INTO pastclass VALUES ('3', 'CSE21', '2', 'FALL', 2017, 4, 3.7);
-INSERT INTO pastclass VALUES ('3', 'CSE100', '2', 'WINTER', 2018, 4, 4.0);
-INSERT INTO pastclass VALUES ('3', 'CSE132A', '1', 'WINTER', 2018, 4, 4.0);
-INSERT INTO pastclass VALUES ('4', 'CSE100', '2', 'FALL', 2017, 4, 3.3);
-INSERT INTO pastclass VALUES ('4', 'CSE132A', '2', 'FALL', 2017, 4, 2.2);
-INSERT INTO pastclass VALUES ('4', 'ECE196', '1', 'WINTER', 2018, 4, 3.3);
+INSERT INTO pastclass VALUES ('1', 'CSE21', '1', 'WINTER', 2018, 4, 1, 'A');
+INSERT INTO pastclass VALUES ('2', 'CSE21', '2', 'FALL', 2017, 4, 1, 'B-');
+INSERT INTO pastclass VALUES ('2', 'CSE100', '2', 'FALL', 2017, 4, 1, 'A');
+INSERT INTO pastclass VALUES ('3', 'CSE21', '2', 'FALL', 2017, 4, 1, 'A-');
+INSERT INTO pastclass VALUES ('3', 'CSE100', '2', 'WINTER', 2018, 4, 1, 'A');
+INSERT INTO pastclass VALUES ('3', 'CSE132A', '1', 'WINTER', 2018, 4, 1, 'A');
+INSERT INTO pastclass VALUES ('4', 'CSE100', '2', 'FALL', 2017, 4, 1, 'B');
+INSERT INTO pastclass VALUES ('4', 'CSE132A', '2', 'FALL', 2017, 4, 2, 'P');
+INSERT INTO pastclass VALUES ('4', 'ECE196', '1', 'WINTER', 2018, 4, 1, 'A');

@@ -102,6 +102,7 @@ CREATE TABLE PASTCLASS (
     Year INT,
     unit INT,
     GRADEOPTION INT,
+    GRADE VARCHAR(10),
     PRIMARY KEY (STUDENTID,COURSEID,SECTIONID,QUARTER,YEAR),
     FOREIGN KEY (STUDENTID) REFERENCES STUDENT(STUDENTID),
     FOREIGN KEY (COURSEID, QUARTER, YEAR) REFERENCES CLASS(COURSEID, QUARTER, YEAR),
@@ -166,8 +167,8 @@ Create Table Degree_Classes(
 );
 
 CREATE VIEW STUDENT_ENROLLMENT AS
-SELECT studentid, courseid, sectionid, quarter, year, unit, gradeoption FROM courseenrollment
+SELECT studentid, courseid, sectionid, quarter, year, unit, gradeoption, grade FROM courseenrollment
 UNION
-SELECT  studentid, courseid, sectionid, quarter, year, unit, gradeoption  FROM pastclass;
+SELECT  studentid, courseid, sectionid, quarter, year, unit, gradeoption, grade  FROM pastclass;
 
 CREATE VIEW ENROLLEDSTUDENTS AS SELECT * FROM STUDENT WHERE enrolled = 1;

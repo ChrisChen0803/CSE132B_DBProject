@@ -162,7 +162,7 @@ Create Table Degree_Classes(
 	Grade VARCHAR(10),
 	Primary Key (DegreeName,Major,Category),
 	Foreign Key(DegreeName,Major) REFERENCES Degree_info(Degree_name,Major)
-)
+);
 
 CREATE VIEW STUDENT_ENROLLMENT AS
 SELECT studentid, courseid, sectionid, quarter, year, unit, gradeoption FROM courseenrollment

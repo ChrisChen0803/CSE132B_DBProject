@@ -153,6 +153,17 @@ CREATE TABLE DEGREE_INFO (
 	FOREIGN KEY (DEPARTMENT_NAME) REFERENCES DEPARTMENT(DEPARTMENTNAME)
 );
 
+Create Table Degree_Classes(
+	DegreeName VARCHAR(50),
+	Major VARCHAR(50),
+	Category VARCHAR(50),
+	Classes VARCHAR(255),
+	Unit INT,
+	Grade VARCHAR(10),
+	Primary Key (DegreeName,Major,Category),
+	Foreign Key(DegreeName,Major) REFERENCES Degree_info(Degree_name,Major)
+)
+
 CREATE VIEW STUDENT_ENROLLMENT AS
 SELECT studentid, courseid, sectionid, quarter, year, unit, gradeoption FROM courseenrollment
 UNION

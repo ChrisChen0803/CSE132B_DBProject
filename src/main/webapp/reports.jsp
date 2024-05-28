@@ -7,5 +7,8 @@
 <li>
 <a href="class_roster.jsp">Class roster<a>
 </li>
+<li>
+<a href="student_gpa.jsp">Student gpa<a>
+</li>
 </ul>
 </html>

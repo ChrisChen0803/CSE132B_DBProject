@@ -80,3 +80,15 @@ INSERT INTO pastclass VALUES ('3', 'CSE132A', '1', 'WINTER', 2018, 4, 1, 'A');
 INSERT INTO pastclass VALUES ('4', 'CSE100', '2', 'FALL', 2017, 4, 1, 'B');
 INSERT INTO pastclass VALUES ('4', 'CSE132A', '2', 'FALL', 2017, 4, 2, 'P');
 INSERT INTO pastclass VALUES ('4', 'ECE196', '1', 'WINTER', 2018, 4, 1, 'A');
+
+
+insert into grade_conversion values('A+', 4.3);
+insert into grade_conversion values('A', 4);
+insert into grade_conversion values('A-', 3.7);
+insert into grade_conversion values('B+', 3.4);
+insert into grade_conversion values('B', 3.1);
+insert into grade_conversion values('B-', 2.8);
+insert into grade_conversion values('C+', 2.5);
+insert into grade_conversion values('C', 2.2);
+insert into grade_conversion values('C-', 1.9);
+insert into grade_conversion values('D', 1.6);

@@ -10,5 +10,8 @@
 <li>
 <a href="student_gpa.jsp">Student gpa<a>
 </li>
+<li>
+<a href="undergrad_degree.jsp">Undergrad degree<a>
+</li>
 </ul>
 </html>

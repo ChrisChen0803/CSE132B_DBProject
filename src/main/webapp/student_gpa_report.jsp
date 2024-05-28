@@ -15,6 +15,7 @@
         Connection connection = null;
         Statement statement = null;
         ResultSet resultSet = null;
+        ResultSet gradeSet = null;
 
         try {
             // Load the PostgreSQL JDBC driver
@@ -57,10 +58,6 @@
             <table border="1">
             <%
             Map<String, List<String[]>> classesByQuarterYear = new HashMap<String, List<String[]>>();
-            Map<String, Double> totalGradePointsByQuarterYear = new HashMap<String, Double>();
-            Map<String, Double> totalUnitsByQuarterYear = new HashMap<String, Double>();
-            double cumulativeTotalGradePoints = 0;
-            double cumulativeTotalUnits = 0;
             %>
             <%
             while (resultSet.next()) {
@@ -76,37 +73,22 @@
 
                 if (!classesByQuarterYear.containsKey(quarterYearKey)) {
                     classesByQuarterYear.put(quarterYearKey, new ArrayList<String[]>());
-                    totalGradePointsByQuarterYear.put(quarterYearKey, 0.0);
-                    totalUnitsByQuarterYear.put(quarterYearKey, 0.0);
-
                 }
                 // Calculate total grade points and units for the quarter
-                String number_grade = "0.0";
-
-                double gradePoint = Double.parseDouble(number_grade) * unit;
-                double totalGradePoints = totalGradePointsByQuarterYear.get(quarterYearKey);
-                double totalUnits = totalUnitsByQuarterYear.get(quarterYearKey);
-                totalGradePoints += gradePoint * unit;
-                totalUnits += unit;
-                totalGradePointsByQuarterYear.put(quarterYearKey, totalGradePoints);
-                totalUnitsByQuarterYear.put(quarterYearKey, totalUnits);
-
-                // Update cumulative total grade points and units
-                cumulativeTotalGradePoints += gradePoint * unit;
-                cumulativeTotalUnits += unit;
-
                 classesByQuarterYear.get(quarterYearKey).add(classDetails);
             }
+            resultSet.close();
             %>
 
             <%
             // Output classes by quarter and year
+            double cumulativeTotalGradePoints = 0;
+            double cumulativeTotalUnits = 0;
             for (Map.Entry<String, List<String[]>> entry : classesByQuarterYear.entrySet()) {
                 String quarterYear = entry.getKey();
                 List<String[]> classes = entry.getValue();
-                double totalGradePoints = totalGradePointsByQuarterYear.get(quarterYear);
-                double totalUnits = totalUnitsByQuarterYear.get(quarterYear);
-                double quarterGPA = totalUnits != 0 ? totalGradePoints / totalUnits : 0;
+                double totalGradePointsByQuarterYear = 0;
+                double totalUnitsByQuarterYear = 0;
             %>
                 <h3>Classes Taken in <%= quarterYear %></h3>
                 <table border="1">
@@ -127,8 +109,26 @@
                             <td><%= classDetails[4] %></td>
                             <td><%= classDetails[5] %></td>
                         </tr>
-                    <% } %>
+                        <%
+                            double number_grade = 0.0;
+                            if (classDetails[5].matches(".*[ABCDEF].*")){
+                                String gradePointQuery = "SELECT DISTINCT NUMBER_GRADE FROM GRADE_CONVERSION " +
+                                                         "WHERE LETTER_GRADE = '" + classDetails[5] + "'";
+                                gradeSet = statement.executeQuery(gradePointQuery);
+                                if (gradeSet.next()) {
+                                    number_grade = gradeSet.getDouble("NUMBER_GRADE");
+                                    totalUnitsByQuarterYear += Double.parseDouble(classDetails[3]);
+
+                                }
+                            }
+                            totalGradePointsByQuarterYear += number_grade * Double.parseDouble(classDetails[3]);
+                        } %>
                 </table>
+                <%
+                double quarterGPA = totalUnitsByQuarterYear != 0 ? totalGradePointsByQuarterYear / totalUnitsByQuarterYear : 0;
+                cumulativeTotalUnits += totalUnitsByQuarterYear;
+                cumulativeTotalGradePoints += totalGradePointsByQuarterYear;
+                %>
                 <p>Quarter GPA: <%= String.format("%.2f", quarterGPA) %></p>
             <%
             }

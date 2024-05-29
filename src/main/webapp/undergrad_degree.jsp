@@ -51,13 +51,15 @@
 
                     // Populate the <select> control with degree data
                     %>
-                    <select name="degree">
+                    <br>
+                    <label for="degree">Select Degree:</label>
+                    <select name="degree" id="degree">
                     <%
                     while (resultSet.next()) {
                         String degree_name = resultSet.getString("DEGREE_NAME");
                         String major = resultSet.getString("MAJOR");
                         %>
-                        <option value="<%= degree_name + "," + major %>"><%= degree_name %> <%= major %></option>
+                        <option value="<%= degree_name %>|<%= major %>"><%= degree_name %> <%= major %></option>
                         <%
                     }
                     %>
@@ -73,7 +75,8 @@
                 }
             %>
         </select>
-        <input type="submit" value="Get Classes">
+        <br>
+        <input type="submit" value="Get Degree Requirement">
     </form>
 </body>
 </html>

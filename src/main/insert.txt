@@ -92,3 +92,11 @@ insert into grade_conversion values('C+', 2.5);
 insert into grade_conversion values('C', 2.2);
 insert into grade_conversion values('C-', 1.9);
 insert into grade_conversion values('D', 1.6);
+
+INSERT INTO DEGREE_CLASSES VALUES('BSC', 'CS', 'LOWER', 'CSE21', 4, 'C');
+INSERT INTO DEGREE_CLASSES VALUES('BSC', 'CS', 'UPPER', 'CSE100, CSE132A', 8, 'C');
+INSERT INTO DEGREE_CLASSES VALUES('BSC', 'CE', 'LOWER', 'CSE21', 4, 'C');
+INSERT INTO DEGREE_CLASSES VALUES('BSC', 'CE', 'UPPER', 'CSE100, CSE132A, ECE196', 12, 'C');
+INSERT INTO DEGREE_CLASSES VALUES('BSC', 'EE', 'LOWER', 'CSE100', 4, 'C');
+INSERT INTO DEGREE_CLASSES VALUES('BSC', 'EE', 'UPPER', 'CSE100, ECE196', 8, 'C');
+

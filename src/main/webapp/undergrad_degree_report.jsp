@@ -1,16 +1,27 @@
 <%@ page import="java.sql.*" %>
+<%@ page import="java.util.*" %>
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Student Classes Report</title>
+    <title>Degree Requirement Calculation</title>
 </head>
 <body>
     <%
         String SSN = request.getParameter("SSN");
+        String degreeParam = request.getParameter("degree");
+        String degree_name = "";
+        String major = "";
+
+        if (degreeParam != null && degreeParam.contains("|")) {
+            String[] parts = degreeParam.split("\\|");
+            degree_name = parts[0];
+            major = parts[1];
+        }
 
         Connection connection = null;
         Statement statement = null;
         ResultSet resultSet = null;
+        ResultSet degreeSet = null;
 
         try {
             // Load the PostgreSQL JDBC driver
@@ -41,34 +52,76 @@
                 Last Name: <%= lastName %><br>
                 <%
             }
-
-            // Query to get classes taken by the student in the current quarter CE.Unit, CE.sectionid
-            String classQuery = "SELECT SE.* FROM STUDENT_ENROLLMENT SE " +
-                                "WHERE SE.studentid = (SELECT studentid FROM ENROLLEDSTUDENTS WHERE SSN = '" + SSN + "')" +
-                                "AND SE.quarter = 'SPRING' AND SE.year = 2018 ";
-;
-            resultSet = statement.executeQuery(classQuery);
             %>
-            <h2>Classes Taken in the Current Quarter</h2>
+            <h2>Remaining Degree Requirements</h2>
             <table border="1">
-                <th>Class Name</th><th>Quarter</th><th>Year</th><th>Units</th><th>Section</th></tr>
+            <p>Degree Name: <%= degree_name %></p>
+            <p>Major: <%= major %></p>
             <%
-            while (resultSet.next()) {
-                String courseId = resultSet.getString("COURSEID");
-                String quarter = resultSet.getString("QUARTER");
-                int year = resultSet.getInt("YEAR");
-                int unit = resultSet.getInt("UNIT");
-                String sectionId = resultSet.getString("SECTIONID");
-                %>
-                <tr>
-                    <td><%= courseId %></td>
-                    <td><%= quarter %></td>
-                    <td><%= year %></td>
-                    <td><%= unit %></td>
-                    <td><%= sectionId %></td>
-                </tr>
-                <%
+
+
+            String degreeQuery = "SELECT DC.* " +
+                                 "FROM DEGREE_CLASSES DC " +
+                                 "WHERE DC.DEGREENAME = '" + degree_name + "' AND DC.MAJOR = '" + major + "'";
+            degreeSet = statement.executeQuery(degreeQuery);
+            // Map to store category and associated classes and details
+            Map<String, List<Map<String, Object>>> categoryMap = new HashMap<String, List<Map<String, Object>>>();
+            double totalUnit = 0;
+            // Iterate through the result set and populate the map
+            while (degreeSet.next()) {
+                String category = degreeSet.getString("Category");
+                String classes = degreeSet.getString("Classes");
+                int unit = degreeSet.getInt("Unit");
+
+                // Create a map to store the class details
+                Map<String, Object> classDetails = new HashMap<String, Object>();
+                classDetails.put("Classes", classes);
+                classDetails.put("Unit", unit);
+
+                // Add the class details to the category map
+                if (!categoryMap.containsKey(category)) {
+                    categoryMap.put(category, new ArrayList<Map<String, Object>>());
+                }
+                categoryMap.get(category).add(classDetails);
             }
+
+            // Iterate over the map to display the results
+            for (Map.Entry<String, List<Map<String, Object>>> entry : categoryMap.entrySet()) {
+                String category = entry.getKey();
+                List<Map<String, Object>> classDetailsList = entry.getValue();
+                %>
+                <h3>Category: <%= category %></h3>
+                <%
+                for (Map<String, Object> classDetails : classDetailsList) {
+                    String classes = (String) classDetails.get("Classes");
+                    int categoryUnit = (Integer) classDetails.get("Unit");
+                    %>
+                    Required Unit: <%= categoryUnit %><br>
+                    Class List: <%= classes %><br>
+                    <%
+                    String studentUnitsQuery = "SELECT PC.courseid, PC.unit " +
+                                               "FROM PASTCLASS PC " +
+                                               "WHERE PC.grade <> 'IN' AND PC.grade <> 'U' AND  PC.grade <> 'NP' " +
+                                               "AND PC.studentid = (SELECT studentid FROM ENROLLEDSTUDENTS WHERE SSN = '" + SSN + "') ";
+                    resultSet = statement.executeQuery(studentUnitsQuery);
+                    while (resultSet.next()) {
+                        String courseid = resultSet.getString("courseid");
+                        int unit = resultSet.getInt("unit");
+                        if (classes.contains(courseid)) {
+                            categoryUnit -= unit;
+                        }
+                    }
+                    if (categoryUnit > 0) totalUnit += categoryUnit;
+                    %>
+                    <br>
+                    Remaining Unit: <%= categoryUnit < 0 ? 0 : categoryUnit %><br>
+                    <%
+                }
+            }
+            %>
+            <br><br>
+            <h2>Total Remaining Unit: <%= totalUnit < 0 ? 0 : totalUnit %></h2><br>
+            <%
         } catch (Exception e) {
             e.printStackTrace();
         } finally {

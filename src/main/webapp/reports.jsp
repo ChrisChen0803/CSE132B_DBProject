@@ -13,5 +13,8 @@
 <li>
 <a href="undergrad_degree.jsp">Undergrad degree<a>
 </li>
+<li>
+<a href="grad_degree.jsp">MS degree<a>
+</li>
 </ul>
 </html>

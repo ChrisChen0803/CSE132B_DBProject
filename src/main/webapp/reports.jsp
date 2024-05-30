@@ -17,4 +17,10 @@
 <a href="grad_degree.jsp">MS degree<a>
 </li>
 </ul>
+<b>Report 2</b>
+<ul>
+<li>
+<a href="class_schedule.jsp">Student Class Schedule<a>
+</li>
+</ul>
 </html>

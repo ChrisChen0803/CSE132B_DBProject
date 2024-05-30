@@ -358,3 +358,61 @@ INSERT INTO PASTCLASS VALUES ('6', 'CSE240A', '1', 'WINTER', 2018, 4, 1, 'S');
 INSERT INTO PASTCLASS VALUES ('7', 'ECE200', '2', 'WINTER', 2018, 4, 1, 'A');
 INSERT INTO PASTCLASS VALUES ('8', 'CSE232', '2', 'WINTER', 2018, 4, 1, 'B');
 INSERT INTO PASTCLASS VALUES ('8', 'CSE232B', '2', 'WINTER', 2018, 4, 1, 'A');
+
+INSERT INTO regular_meeting (SECTIONID, COURSEID, QUARTER, YEAR, day_of_week, start_time, end_time, building, type)
+VALUES ('1', 'CSE203B', 'SPRING', 2018, 'MWF', '09:00:00', '11:00:00', 'Center Hall', 'Lecture');
+INSERT INTO regular_meeting (SECTIONID, COURSEID, QUARTER, YEAR, day_of_week, start_time, end_time, building, type)
+VALUES ('2', 'CSE203B', 'SPRING', 2018, 'MWF', '09:00:00', '11:00:00', 'Center Hall', 'Lecture');
+INSERT INTO regular_meeting (SECTIONID, COURSEID, QUARTER, YEAR, day_of_week, start_time, end_time, building, type)
+VALUES ('1', 'CSE203B', 'SPRING', 2018, 'F', '12:00:00', '13:00:00', 'Center Hall', 'Discussions');
+INSERT INTO regular_meeting (SECTIONID, COURSEID, QUARTER, YEAR, day_of_week, start_time, end_time, building, type)
+VALUES ('2', 'CSE203B', 'SPRING', 2018, 'F', '12:00:00', '13:00:00', 'Center Hall', 'Discussions');
+INSERT INTO regular_meeting (SECTIONID, COURSEID, QUARTER, YEAR, day_of_week, start_time, end_time, building, type)
+VALUES ('1', 'CSE100', 'SPRING', 2018, 'MWF', '09:00:00', '11:00:00', 'Center Hall', 'Lecture');
+INSERT INTO regular_meeting (SECTIONID, COURSEID, QUARTER, YEAR, day_of_week, start_time, end_time, building, type)
+VALUES ('2', 'CSE100', 'SPRING', 2018, 'MWF', '09:00:00', '11:00:00', 'Center Hall', 'Lecture');
+INSERT INTO regular_meeting (SECTIONID, COURSEID, QUARTER, YEAR, day_of_week, start_time, end_time, building, type)
+VALUES ('1', 'CSE100', 'SPRING', 2018, 'F', '12:00:00', '13:00:00', 'Center Hall', 'Discussions');
+INSERT INTO regular_meeting (SECTIONID, COURSEID, QUARTER, YEAR, day_of_week, start_time, end_time, building, type)
+VALUES ('2', 'CSE100', 'SPRING', 2018, 'F', '13:00:00', '14:00:00', 'Center Hall', 'Discussions');
+INSERT INTO regular_meeting (SECTIONID, COURSEID, QUARTER, YEAR, day_of_week, start_time, end_time, building, type)
+VALUES ('1', 'CSE132A', 'SPRING', 2018, 'TuTh', '09:00:00', '11:00:00', 'Center Hall', 'Lecture');
+INSERT INTO regular_meeting (SECTIONID, COURSEID, QUARTER, YEAR, day_of_week, start_time, end_time, building, type)
+VALUES ('2', 'CSE132A', 'SPRING', 2018, 'TuTh', '09:00:00', '11:00:00', 'Center Hall', 'Lecture');
+INSERT INTO regular_meeting (SECTIONID, COURSEID, QUARTER, YEAR, day_of_week, start_time, end_time, building, type)
+VALUES ('1', 'CSE132A', 'SPRING', 2018, 'W', '12:00:00', '13:00:00', 'Center Hall', 'Discussions');
+INSERT INTO regular_meeting (SECTIONID, COURSEID, QUARTER, YEAR, day_of_week, start_time, end_time, building, type)
+VALUES ('2', 'CSE132A', 'SPRING', 2018, 'F', '13:00:00', '14:00:00', 'Center Hall', 'Discussions');
+INSERT INTO regular_meeting (SECTIONID, COURSEID, QUARTER, YEAR, day_of_week, start_time, end_time, building, type)
+VALUES ('1', 'CSE132B', 'SPRING', 2018, 'TuTh', '10:00:00', '13:00:00', 'Center Hall', 'Lecture');
+INSERT INTO regular_meeting (SECTIONID, COURSEID, QUARTER, YEAR, day_of_week, start_time, end_time, building, type)
+VALUES ('2', 'CSE132B', 'SPRING', 2018, 'TuTh', '10:00:00', '13:00:00', 'Center Hall', 'Lecture');
+INSERT INTO regular_meeting (SECTIONID, COURSEID, QUARTER, YEAR, day_of_week, start_time, end_time, building, type)
+VALUES ('1', 'CSE132B', 'SPRING', 2018, 'W', '13:00:00', '14:00:00', 'Center Hall', 'Discussions');
+INSERT INTO regular_meeting (SECTIONID, COURSEID, QUARTER, YEAR, day_of_week, start_time, end_time, building, type)
+VALUES ('2', 'CSE132B', 'SPRING', 2018, 'F', '10:00:00', '11:00:00', 'Center Hall', 'Discussions');
+INSERT INTO regular_meeting (SECTIONID, COURSEID, QUARTER, YEAR, day_of_week, start_time, end_time, building, type)
+VALUES ('1', 'CSE21', 'SPRING', 2018, 'TuTh', '14:00:00', '16:00:00', 'Center Hall', 'Lecture');
+INSERT INTO regular_meeting (SECTIONID, COURSEID, QUARTER, YEAR, day_of_week, start_time, end_time, building, type)
+VALUES ('2', 'CSE21', 'SPRING', 2018, 'TuTh', '14:00:00', '16:00:00', 'Center Hall', 'Lecture');
+INSERT INTO regular_meeting (SECTIONID, COURSEID, QUARTER, YEAR, day_of_week, start_time, end_time, building, type)
+VALUES ('1', 'CSE21', 'SPRING', 2018, 'W', '15:00:00', '16:00:00', 'Center Hall', 'Discussions');
+INSERT INTO regular_meeting (SECTIONID, COURSEID, QUARTER, YEAR, day_of_week, start_time, end_time, building, type)
+VALUES ('2', 'CSE21', 'SPRING', 2018, 'F', '15:00:00', '16:00:00', 'Center Hall', 'Discussions');
+INSERT INTO regular_meeting (SECTIONID, COURSEID, QUARTER, YEAR, day_of_week, start_time, end_time, building, type)
+VALUES ('1', 'ECE196', 'SPRING', 2018, 'MWF', '11:00:00', '13:00:00', 'Center Hall', 'Lecture');
+INSERT INTO regular_meeting (SECTIONID, COURSEID, QUARTER, YEAR, day_of_week, start_time, end_time, building, type)
+VALUES ('2', 'ECE196', 'SPRING', 2018, 'MWF', '11:00:00', '13:00:00', 'Center Hall', 'Lecture');
+INSERT INTO regular_meeting (SECTIONID, COURSEID, QUARTER, YEAR, day_of_week, start_time, end_time, building, type)
+VALUES ('1', 'ECE196', 'SPRING', 2018, 'Tu', '15:00:00', '16:00:00', 'Center Hall', 'Discussions');
+INSERT INTO regular_meeting (SECTIONID, COURSEID, QUARTER, YEAR, day_of_week, start_time, end_time, building, type)
+VALUES ('2', 'ECE196', 'SPRING', 2018, 'Th', '15:00:00', '16:00:00', 'Center Hall', 'Discussions');
+INSERT INTO regular_meeting (SECTIONID, COURSEID, QUARTER, YEAR, day_of_week, start_time, end_time, building, type)
+VALUES ('1', 'CSE207B', 'SPRING', 2018, 'MWF', '10:00:00', '12:00:00', 'Center Hall', 'Lecture');
+INSERT INTO regular_meeting (SECTIONID, COURSEID, QUARTER, YEAR, day_of_week, start_time, end_time, building, type)
+VALUES ('2', 'CSE207B', 'SPRING', 2018, 'MWF', '10:00:00', '12:00:00', 'Center Hall', 'Lecture');
+INSERT INTO regular_meeting (SECTIONID, COURSEID, QUARTER, YEAR, day_of_week, start_time, end_time, building, type)
+VALUES ('1', 'CSE207B', 'SPRING', 2018, 'Tu', '14:00:00', '15:00:00', 'Center Hall', 'Discussions');
+INSERT INTO regular_meeting (SECTIONID, COURSEID, QUARTER, YEAR, day_of_week, start_time, end_time, building, type)
+VALUES ('2', 'CSE207B', 'SPRING', 2018, 'Th', '14:00:00', '15:00:00', 'Center Hall', 'Discussions');
+

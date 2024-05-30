@@ -178,3 +178,16 @@ create table GRADE_CONVERSION(
 		  NUMBER_GRADE DECIMAL(2,1)
 );
 
+CREATE TABLE regular_meeting (
+    meetingid SERIAL PRIMARY KEY,
+    SECTIONID VARCHAR(20),
+    COURSEID VARCHAR(20),
+    QUARTER VARCHAR(255),
+    YEAR INT,
+    day_of_week VARCHAR(10),
+    start_time TIME,
+    end_time TIME,
+    building VARCHAR(100),
+    type VARCHAR(50),
+    FOREIGN KEY (SECTIONID, COURSEID, QUARTER, YEAR) REFERENCES section(SECTIONID, COURSEID, QUARTER, YEAR)
+);

@@ -23,13 +23,14 @@
         ResultSet resultSet = null;
         ResultSet degreeSet = null;
         ResultSet gpaSet = null;
+        ResultSet classSet = null;
 
         try {
             // Load the PostgreSQL JDBC driver
             Class.forName("org.postgresql.Driver");
 
             // Establish connection to the database
-            String url = "jdbc:postgresql://localhost:5433/CSE132B";
+            String url = "jdbc:postgresql://localhost:5432/CSE132B";
             String username = "postgres";
             String password = "Cyj020803!";
             connection = DriverManager.getConnection(url, username, password);
@@ -148,9 +149,42 @@
                         }
                     }
                     if (categoryUnit <= 0) completedCategory += " " + category;
+                    // Split the string into a list of classes
+                    List<String> classList = Arrays.asList(classes.split(",\\s*"));
+
+                    // Create a string builder for the classes in clause
+                    StringBuilder classesInClauseBuilder = new StringBuilder();
+                    for (int i = 0; i < classList.size(); i++) {
+                        classesInClauseBuilder.append("'").append(classList.get(i).trim()).append("'");
+                        if (i < classList.size() - 1) {
+                            classesInClauseBuilder.append(", ");
+                        }
+                    }
+                    String classesInClause = classesInClauseBuilder.toString();
+
+                    String classQuery = "SELECT c1.COURSEID, MAX(c1.quarter) AS maxQuarter, MIN(c1.year) AS minYear FROM CLASS c1 " +
+                                        "WHERE c1.COURSEID IN (" + classesInClause + ") AND (c1.year = 2018 AND c1.quarter = 'FALL' " +
+                                        "OR c1.year > 2018 AND NOT EXISTS (SELECT * FROM CLASS c2 WHERE c2.COURSEID = c1.COURSEID AND " +
+                                        "c2.year = 2018 AND c2.QUARTER = 'FALL' )) GROUP BY c1.COURSEID ";
+
+
+                    classSet = statement.executeQuery(classQuery);
                     %>
                     <br>
                     Class Remaining: <%= classes %><br>
+                    Class Schedule: <br>
+                    <%
+                        while (classSet.next()) {
+                            String className = classSet.getString("courseid");
+                            String classQuarter = classSet.getString("maxQuarter");
+                            String classYear = classSet.getString("minYear");
+
+                    %>
+                        Class: <%= className %>, Quarter: <%= classQuarter %>, Year: <%= classYear %><br>
+                    <%
+                        }
+                    %>
+                    <br>
                     Remaining Unit: <%= categoryUnit < 0 ? 0 : categoryUnit %><br>
                     Category GPA: <%= gpaPoints/gpaUnit %><br>
                     <%

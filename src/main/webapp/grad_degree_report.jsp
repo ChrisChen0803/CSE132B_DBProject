@@ -162,10 +162,10 @@
                     }
                     String classesInClause = classesInClauseBuilder.toString();
 
-                    String classQuery = "SELECT c1.COURSEID, MAX(c1.quarter) AS maxQuarter, MIN(c1.year) AS minYear FROM CLASS c1 " +
+                    String classQuery = "SELECT c1.COURSEID, c1.quarter AS maxQuarter, c1.year AS minYear FROM CLASS c1 " +
                                         "WHERE c1.COURSEID IN (" + classesInClause + ") AND (c1.year = 2018 AND c1.quarter = 'FALL' " +
                                         "OR c1.year > 2018 AND NOT EXISTS (SELECT * FROM CLASS c2 WHERE c2.COURSEID = c1.COURSEID AND " +
-                                        "c2.year = 2018 AND c2.QUARTER = 'FALL' )) GROUP BY c1.COURSEID ";
+                                        "((c2.year = 2018 AND c2.QUARTER = 'FALL') OR (c2.year > 2018 AND (c2.year < c1.year OR (c2.year = c1.year AND c2.QUARTER > c1.QUARTER)))))) ";
 
 
                     classSet = statement.executeQuery(classQuery);

@@ -95,7 +95,7 @@
                 String category = entry.getKey();
                 List<Map<String, Object>> classDetailsList = entry.getValue();
                 %>
-                <h3>Category: <%= category %></h3>
+                <h3>Concentration: <%= category %></h3>
                 <%
                 for (Map<String, Object> classDetails : classDetailsList) {
                     String classes = (String) classDetails.get("Classes");
@@ -192,7 +192,7 @@
             }
             %>
             <br><br>
-            <h2>Completed Category: <%= completedCategory %></h2>
+            <h2>Completed Concentration: <%= completedCategory %></h2>
             <%
         } catch (Exception e) {
             e.printStackTrace();

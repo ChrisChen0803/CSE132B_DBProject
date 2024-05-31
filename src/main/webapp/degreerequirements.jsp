@@ -68,13 +68,14 @@ connection.setAutoCommit(false);
 // Create the prepared statement and use it to
 // UPDATE the DEGREE_INFO attributes in the DEGREE_INFO table.
 PreparedStatement pstatement = connection.prepareStatement(
-"UPDATE DEGREE_INFO SET CLASS_LIST = ?, UNIT = ?, GRADE = ? WHERE DEGREE_NAME = ? AND DEPARTMENT_NAME = ? AND CATEGORY = ?");
+"UPDATE DEGREE_INFO SET CLASS_LIST = ?, UNIT = ?, GRADE = ?, DEPARTMENT_NAME = ?, CATEGORY = ? WHERE DEGREE_NAME = ?");
 pstatement.setString(1, request.getParameter("CLASS_LIST"));
 pstatement.setInt(2,Integer.parseInt(request.getParameter("UNIT")));
 pstatement.setString(3, request.getParameter("GRADE"));
-pstatement.setString(4, request.getParameter("DEGREE_NAME"));
-pstatement.setString(5, request.getParameter("DEPARTMENT_NAME"));
-pstatement.setString(6, request.getParameter("CATEGORY"));
+pstatement.setString(4, request.getParameter("DEPARTMENT_NAME"));
+pstatement.setString(5, request.getParameter("CATEGORY"));
+pstatement.setString(6, request.getParameter("DEGREE_NAME"));
+
 int rowCount = pstatement.executeUpdate();
 connection.setAutoCommit(false);
 connection.setAutoCommit(true);
@@ -85,10 +86,8 @@ connection.setAutoCommit(false);
 // Create the prepared statement and use it to
 // DELETE the DEGREE_INFO FROM the DEGREE_INFO table.
 PreparedStatement pstmt = connection.prepareStatement(
-"DELETE FROM DEGREE_INFO WHERE DEGREE_NAME = ? AND DEPARTMENT_NAME = ? AND CATEGORY = ?");
+"DELETE FROM DEGREE_INFO WHERE DEGREE_NAME = ?");
 pstmt.setString(1,request.getParameter("DEGREE_NAME"));
-pstmt.setString(2,request.getParameter("DEPARTMENT_NAME"));
-pstmt.setString(3,request.getParameter("CATEGORY"));
 int rowCount = pstmt.executeUpdate();
 connection.setAutoCommit(false);
 connection.setAutoCommit(true);
@@ -121,9 +120,6 @@ while ( rs.next() ) {
 <form action="degreerequirements.jsp" method="get">
 <input type="hidden" value="delete" name="action">
 <input type="hidden" value="<%= rs.getString("DEGREE_NAME") %>" name="DEGREE_NAME">
-<input type="hidden" value="<%= rs.getString("DEPARTMENT_NAME") %>" name="DEPARTMENT_NAME">
-<input type="hidden" value="<%= rs.getString("CATEGORY") %>" name="CATEGORY">
-
 <td><input type="submit" value="Delete"></td>
 </form>
 </tr>

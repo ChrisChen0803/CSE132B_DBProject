@@ -22,5 +22,14 @@
 <li>
 <a href="class_schedule.jsp">Student Class Schedule<a>
 </li>
+<li>
+<a href="available_timeslots.jsp">Available Timeslots<a>
+</li>
+</ul>
+<b>Report 3</b>
+<ul>
+<li>
+<a href="decision_support.jsp">Decision Support<a>
+</li>
 </ul>
 </html>

@@ -416,3 +416,11 @@ VALUES ('1', 'CSE207B', 'SPRING', 2018, 'Tu', '14:00:00', '15:00:00', 'Center Ha
 INSERT INTO regular_meeting (SECTIONID, COURSEID, QUARTER, YEAR, day_of_week, start_time, end_time, building, type)
 VALUES ('2', 'CSE207B', 'SPRING', 2018, 'Th', '14:00:00', '15:00:00', 'Center Hall', 'Discussions');
 
+
+INSERT INTO Faculty (FACULTYNAME, TITLE, DEPARTMENT) VALUES ('AA', 'Professor', 'ECE');
+INSERT INTO Faculty (FACULTYNAME, TITLE, DEPARTMENT) VALUES ('BB', 'Associate Professor', 'CSE');
+INSERT INTO Faculty (FACULTYNAME, TITLE, DEPARTMENT) VALUES ('CC', 'Assistant Professor', 'ECE');
+INSERT INTO Faculty (FACULTYNAME, TITLE, DEPARTMENT) VALUES ('DD', 'Lecturer', 'CSE');
+INSERT INTO Faculty (FACULTYNAME, TITLE, DEPARTMENT) VALUES ('EE', 'Professor', 'CSE');
+
+

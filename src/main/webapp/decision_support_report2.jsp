@@ -33,8 +33,7 @@
                 "COUNT(CASE WHEN pc.grade IN ('C', 'C-', 'C+') THEN 1 END) AS C, " +
                 "COUNT(CASE WHEN pc.grade = 'D' THEN 1 END) AS D, " +
                 "COUNT(CASE WHEN pc.grade NOT IN ('A', 'A-', 'A+', 'B', 'B-', 'B+', 'C', 'C-', 'C+', 'D','IN') THEN 1 END) AS other " +
-                "FROM PASTCLASS pc WHERE pc.courseid = '" + courseid + "' " +
-                "AND pc.year = " + year + ";";
+                "FROM PASTCLASS pc WHERE pc.courseid = '" + courseid + "';";
             resultSet = statement.executeQuery(query);
             if (resultSet.next()) {
                         int countA = resultSet.getInt("A");

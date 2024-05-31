@@ -8,7 +8,6 @@
     <%
         String courseid = request.getParameter("COURSEID");
         String facultyname = request.getParameter("PROFESSOR");
-        String year = request.getParameter("YEAR");
 
         Connection connection = null;
         Statement statement = null;
@@ -35,8 +34,7 @@
                 "COUNT(CASE WHEN pc.grade = 'D' THEN 1 END) AS D, " +
                 "COUNT(CASE WHEN pc.grade NOT IN ('A', 'A-', 'A+', 'B', 'B-', 'B+', 'C', 'C-', 'C+', 'D','IN') THEN 1 END) AS other " +
                 "FROM PASTCLASS pc WHERE pc.courseid = '" + courseid + "' " +
-                "AND pc.facultyname = '" + facultyname + "' " +
-                "AND pc.year = " + year + ";";
+                "AND pc.facultyname = '" + facultyname + "'; " ;
             resultSet = statement.executeQuery(query);
             if (resultSet.next()) {
                         int countA = resultSet.getInt("A");

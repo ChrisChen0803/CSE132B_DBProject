@@ -3,7 +3,6 @@
     // Retrieve request parameters
     String courseid = request.getParameter("COURSEID");
     String facultyname = request.getParameter("PROFESSOR");
-    String year = request.getParameter("YEAR");
 
     // Initialize database variables
     Connection connection = null;
@@ -30,7 +29,6 @@
             "JOIN GRADE_CONVERSION grade_conversion ON pc.grade = grade_conversion.LETTER_GRADE " +
             "WHERE pc.courseid = '" + courseid + "' " +
             "AND pc.facultyname = '" + facultyname + "' " +
-            "AND pc.year = '" + year + "' " +
             "AND pc.grade != 'IN';";
 
         // Print the constructed query for debugging

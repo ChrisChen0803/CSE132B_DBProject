@@ -234,44 +234,6 @@
                             }
                         %>
                     </select>
-
-        <label for="YEAR">Select YEAR:</label>
-                                <select name="YEAR" id="YEAR">
-                                    <%
-
-                                        try {
-                                            // Load the PostgreSQL JDBC driver
-                                            Class.forName("org.postgresql.Driver");
-
-                                            // Establish connection to the database
-                                             String url = "jdbc:postgresql://localhost:5432/CSE132B";
-                                             String username = "postgres";
-                                             String password = "Cyj020803!";
-                                            connection = DriverManager.getConnection(url, username, password);
-
-                                            // Create a statement
-                                            statement = connection.createStatement();
-
-                                            // Query to get students enrolled in the current quarter
-                                            String query = "SELECT YEAR FROM PASTCLASS GROUP BY YEAR";
-                                            resultSet = statement.executeQuery(query);
-
-                                            // Populate the <select> control with student data
-                                            while (resultSet.next()) {
-                                                String YEAR = resultSet.getString("YEAR");
-                                                %>
-                                                <option value="<%= YEAR %>"><%= YEAR %></option>
-                                                <%
-                                            }
-                                        } catch (Exception e) {
-                                            e.printStackTrace();
-                                        } finally {
-                                            try { if (resultSet != null) resultSet.close(); } catch (Exception e) { }
-                                            try { if (statement != null) statement.close(); } catch (Exception e) { }
-                                            try { if (connection != null) connection.close(); } catch (Exception e) { }
-                                        }
-                                    %>
-                                </select>
             <input type="submit" value="Get Summary">
         </form>
         <form method="post" action="decision_support_report2.jsp">
@@ -312,43 +274,7 @@
                             }
                         %>
                     </select>
-                <label for="YEAR">Select YEAR:</label>
-                                        <select name="YEAR" id="YEAR">
-                                            <%
 
-                                                try {
-                                                    // Load the PostgreSQL JDBC driver
-                                                    Class.forName("org.postgresql.Driver");
-
-                                                    // Establish connection to the database
-                                                     String url = "jdbc:postgresql://localhost:5432/CSE132B";
-                                                     String username = "postgres";
-                                                     String password = "Cyj020803!";
-                                                    connection = DriverManager.getConnection(url, username, password);
-
-                                                    // Create a statement
-                                                    statement = connection.createStatement();
-
-                                                    // Query to get students enrolled in the current quarter
-                                                    String query = "SELECT YEAR FROM PASTCLASS GROUP BY YEAR";
-                                                    resultSet = statement.executeQuery(query);
-
-                                                    // Populate the <select> control with student data
-                                                    while (resultSet.next()) {
-                                                        String YEAR = resultSet.getString("YEAR");
-                                                        %>
-                                                        <option value="<%= YEAR %>"><%= YEAR %></option>
-                                                        <%
-                                                    }
-                                                } catch (Exception e) {
-                                                    e.printStackTrace();
-                                                } finally {
-                                                    try { if (resultSet != null) resultSet.close(); } catch (Exception e) { }
-                                                    try { if (statement != null) statement.close(); } catch (Exception e) { }
-                                                    try { if (connection != null) connection.close(); } catch (Exception e) { }
-                                                }
-                                            %>
-                                        </select>
                     <input type="submit" value="Get Summary">
                 </form>
                 <form method="post" action="decision_support_report3.jsp">
@@ -426,44 +352,6 @@
                                             }
                                         %>
                                     </select>
-
-                        <label for="YEAR">Select YEAR:</label>
-                                                <select name="YEAR" id="YEAR">
-                                                    <%
-
-                                                        try {
-                                                            // Load the PostgreSQL JDBC driver
-                                                            Class.forName("org.postgresql.Driver");
-
-                                                            // Establish connection to the database
-                                                             String url = "jdbc:postgresql://localhost:5432/CSE132B";
-                                                             String username = "postgres";
-                                                             String password = "Cyj020803!";
-                                                            connection = DriverManager.getConnection(url, username, password);
-
-                                                            // Create a statement
-                                                            statement = connection.createStatement();
-
-                                                            // Query to get students enrolled in the current quarter
-                                                            String query = "SELECT YEAR FROM PASTCLASS GROUP BY YEAR";
-                                                            resultSet = statement.executeQuery(query);
-
-                                                            // Populate the <select> control with student data
-                                                            while (resultSet.next()) {
-                                                                String YEAR = resultSet.getString("YEAR");
-                                                                %>
-                                                                <option value="<%= YEAR %>"><%= YEAR %></option>
-                                                                <%
-                                                            }
-                                                        } catch (Exception e) {
-                                                            e.printStackTrace();
-                                                        } finally {
-                                                            try { if (resultSet != null) resultSet.close(); } catch (Exception e) { }
-                                                            try { if (statement != null) statement.close(); } catch (Exception e) { }
-                                                            try { if (connection != null) connection.close(); } catch (Exception e) { }
-                                                        }
-                                                    %>
-                                                </select>
                             <input type="submit" value="Get Average GPA">
                         </form>
 </body>

@@ -71,15 +71,15 @@ INSERT INTO courseenrollment VALUES ('2', 'ECE196', '1', 'SPRING', 2018, 4, 1, '
 INSERT INTO courseenrollment VALUES ('2', 'CSE132B', '2', 'SPRING', 2018, 4, 1, 'IN');
 INSERT INTO courseenrollment VALUES ('3', 'CSE132B', '2', 'SPRING', 2018, 4, 1, 'IN');
 
-INSERT INTO pastclass VALUES ('1', 'CSE21', '1', 'WINTER', 2018, 4, 1, 'A');
-INSERT INTO pastclass VALUES ('2', 'CSE21', '2', 'FALL', 2017, 4, 1, 'B-');
-INSERT INTO pastclass VALUES ('2', 'CSE100', '2', 'FALL', 2017, 4, 1, 'A');
-INSERT INTO pastclass VALUES ('3', 'CSE21', '2', 'FALL', 2017, 4, 1, 'A-');
-INSERT INTO pastclass VALUES ('3', 'CSE100', '2', 'WINTER', 2018, 4, 1, 'A');
-INSERT INTO pastclass VALUES ('3', 'CSE132A', '1', 'WINTER', 2018, 4, 1, 'A');
-INSERT INTO pastclass VALUES ('4', 'CSE100', '2', 'FALL', 2017, 4, 1, 'B');
-INSERT INTO pastclass VALUES ('4', 'CSE132A', '2', 'FALL', 2017, 4, 2, 'P');
-INSERT INTO pastclass VALUES ('4', 'ECE196', '1', 'WINTER', 2018, 4, 1, 'A');
+INSERT INTO pastclass VALUES ('1', 'CSE21', '1', 'WINTER', 2018, 4, 1, 'A', 'BB');
+INSERT INTO pastclass VALUES ('2', 'CSE21', '2', 'FALL', 2017, 4, 1, 'B-', 'EE');
+INSERT INTO pastclass VALUES ('2', 'CSE100', '2', 'FALL', 2017, 4, 1, 'A', 'DD');
+INSERT INTO pastclass VALUES ('3', 'CSE21', '2', 'FALL', 2017, 4, 1, 'A-', 'CC');
+INSERT INTO pastclass VALUES ('3', 'CSE100', '2', 'WINTER', 2018, 4, 1, 'A', 'AA');
+INSERT INTO pastclass VALUES ('3', 'CSE132A', '1', 'WINTER', 2018, 4, 1, 'A', 'DD');
+INSERT INTO pastclass VALUES ('4', 'CSE100', '2', 'FALL', 2017, 4, 1, 'B', 'CC');
+INSERT INTO pastclass VALUES ('4', 'CSE132A', '2', 'FALL', 2017, 4, 2, 'P', 'EE');
+INSERT INTO pastclass VALUES ('4', 'ECE196', '1', 'WINTER', 2018, 4, 1, 'A', 'AA');
 
 
 insert into grade_conversion values('A+', 4.3);
@@ -350,14 +350,14 @@ INSERT INTO courseenrollment VALUES ('7', 'ECE260A', '2', 'SPRING', 2018, 4, 1, 
 INSERT INTO courseenrollment VALUES ('8', 'CSE203B', '2', 'SPRING', 2018, 4, 1, 'IN');
 INSERT INTO courseenrollment VALUES ('8', 'CSE234', '2', 'SPRING', 2018, 4, 1, 'IN');
 
-INSERT INTO PASTCLASS VALUES ('5', 'CSE203B', '1', 'FALL', 2017, 4, 1, 'A');
-INSERT INTO PASTCLASS VALUES ('5', 'CSE234', '2', 'WINTER', 2018, 4, 1, 'B+');
-INSERT INTO PASTCLASS VALUES ('5', 'CSE207B', '2', 'WINTER', 2018, 4, 1, 'A-');
-INSERT INTO PASTCLASS VALUES ('6', 'CSE203B', '2', 'WINTER', 2018, 4, 1, 'A-');
-INSERT INTO PASTCLASS VALUES ('6', 'CSE240A', '1', 'WINTER', 2018, 4, 1, 'S');
-INSERT INTO PASTCLASS VALUES ('7', 'ECE200', '2', 'WINTER', 2018, 4, 1, 'A');
-INSERT INTO PASTCLASS VALUES ('8', 'CSE232', '2', 'WINTER', 2018, 4, 1, 'B');
-INSERT INTO PASTCLASS VALUES ('8', 'CSE232B', '2', 'WINTER', 2018, 4, 1, 'A');
+INSERT INTO PASTCLASS VALUES ('5', 'CSE203B', '1', 'FALL', 2017, 4, 1, 'A', 'AA');
+INSERT INTO PASTCLASS VALUES ('5', 'CSE234', '2', 'WINTER', 2018, 4, 1, 'B+', 'AA');
+INSERT INTO PASTCLASS VALUES ('5', 'CSE207B', '2', 'WINTER', 2018, 4, 1, 'A-', 'BB');
+INSERT INTO PASTCLASS VALUES ('6', 'CSE203B', '2', 'WINTER', 2018, 4, 1, 'A-', 'BB');
+INSERT INTO PASTCLASS VALUES ('6', 'CSE240A', '1', 'WINTER', 2018, 4, 1, 'S', 'BB');
+INSERT INTO PASTCLASS VALUES ('7', 'ECE200', '2', 'WINTER', 2018, 4, 1, 'A', 'CC');
+INSERT INTO PASTCLASS VALUES ('8', 'CSE232', '2', 'WINTER', 2018, 4, 1, 'B', 'DD');
+INSERT INTO PASTCLASS VALUES ('8', 'CSE232B', '2', 'WINTER', 2018, 4, 1, 'A', 'EE');
 
 INSERT INTO regular_meeting (SECTIONID, COURSEID, QUARTER, YEAR, day_of_week, start_time, end_time, building, type)
 VALUES ('1', 'CSE203B', 'SPRING', 2018, 'MWF', '09:00:00', '11:00:00', 'Center Hall', 'Lecture');

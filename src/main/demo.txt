@@ -1,0 +1,180 @@
+INSERT INTO DEPARTMENT VALUES('Computer Science');
+INSERT INTO DEPARTMENT VALUES('Mathematics');
+INSERT INTO DEPARTMENT VALUES('Physics');
+INSERT INTO DEPARTMENT VALUES('Biology');
+INSERT INTO DEPARTMENT VALUES('Chemistry');
+INSERT INTO DEPARTMENT VALUES('Statistics');
+
+INSERT INTO DEGREE_INFO VALUES ('BSC', 'Computer Science', 'Computer Science', '134', 'C-');
+INSERT INTO DEGREE_INFO VALUES ('BSC', 'Mathematics', 'Mathematics', '120', 'C-');
+INSERT INTO DEGREE_INFO VALUES ('BSC', 'Physics', 'Physics', '120', 'C-');
+INSERT INTO DEGREE_INFO VALUES ('BSC', 'Biology', 'Biology', '120', 'C-');
+INSERT INTO DEGREE_INFO VALUES ('BSC', 'Chemistry', 'Chemistry', '120', 'C-');
+INSERT INTO DEGREE_INFO VALUES ('BSC', 'Statistics', 'Statistics', '120', 'C-');
+INSERT INTO DEGREE_INFO VALUES ('MS', 'Computer Science', 'Computer Science', '40', 'B-');
+
+
+INSERT INTO DEGREE_CLASSES VALUES('BSC', 'Computer Science', 'Lower Division', 'CSE101,CSE132C,CSE291B', 70, 'C-');
+INSERT INTO DEGREE_CLASSES VALUES('BSC', 'Computer Science', 'Upper Division', 'CSE132A,CSE132B', 40, 'C-');
+INSERT INTO DEGREE_CLASSES VALUES('BSC', 'Computer Science', 'Technical Elective', 'CSE291,CSE232A,CSE291B', 24, 'C-');
+INSERT INTO DEGREE_CLASSES VALUES('BSC', 'Mathematics', 'Lower Division', 'MATH101', 60, 'C-');
+INSERT INTO DEGREE_CLASSES VALUES('BSC', 'Mathematics', 'Upper Division', '', 40, 'C-');
+INSERT INTO DEGREE_CLASSES VALUES('BSC', 'Mathematics', 'Technical Elective', '', 24, 'C-');
+INSERT INTO DEGREE_CLASSES VALUES('BSC', 'Physics', 'Lower Division', 'PHYS101', 60, 'C-');
+INSERT INTO DEGREE_CLASSES VALUES('BSC', 'Physics', 'Upper Division', '', 40, 'C-');
+INSERT INTO DEGREE_CLASSES VALUES('BSC', 'Physics', 'Technical Elective', '', 20, 'C-');
+INSERT INTO DEGREE_CLASSES VALUES('BSC', 'Biology', 'Lower Division', 'BIO101', 60, 'C-');
+INSERT INTO DEGREE_CLASSES VALUES('BSC', 'Biology', 'Upper Division', '',40, 'C-');
+INSERT INTO DEGREE_CLASSES VALUES('BSC', 'Biology', 'Technical Elective', '', 20, 'C-');
+INSERT INTO DEGREE_CLASSES VALUES('BSC', 'Chemistry', 'Lower Division', 'CHEM101', 60, 'C-');
+INSERT INTO DEGREE_CLASSES VALUES('BSC', 'Chemistry', 'Upper Division', '',40, 'C-');
+INSERT INTO DEGREE_CLASSES VALUES('BSC', 'Chemistry', 'Technical Elective', '', 20, 'C-');
+INSERT INTO DEGREE_CLASSES VALUES('BSC', 'Statistics', 'Lower Division', 'STAT101', 60, 'C-');
+INSERT INTO DEGREE_CLASSES VALUES('BSC', 'Statistics', 'Upper Division', '', 40, 'C-');
+INSERT INTO DEGREE_CLASSES VALUES('BSC', 'Statistics', 'Technical Elective', '', 20, 'C-');
+INSERT INTO DEGREE_CLASSES VALUES('MS', 'Computer Science', 'Machine Learning', 'CSE291,CSE232A,CSE291B', 12, 'B');
+INSERT INTO DEGREE_CLASSES VALUES('MS', 'Computer Science', 'Lower Division', 'CSE101,CSE132C,CSE291B', 0, 'B');
+INSERT INTO DEGREE_CLASSES VALUES('MS', 'Computer Science', 'Upper Division', 'CSE132A,CSE132B', 25, 'B');
+INSERT INTO DEGREE_CLASSES VALUES('MS', 'Computer Science', 'Technical Elective', 'CSE291,CSE232A,CSE291B', 20, 'B');
+
+insert into grade_conversion values('A+', 4.3);
+insert into grade_conversion values('A', 4);
+insert into grade_conversion values('A-', 3.7);
+insert into grade_conversion values('B+', 3.4);
+insert into grade_conversion values('B', 3.1);
+insert into grade_conversion values('B-', 2.8);
+insert into grade_conversion values('C+', 2.5);
+insert into grade_conversion values('C', 2.2);
+insert into grade_conversion values('C-', 1.9);
+insert into grade_conversion values('D', 1.6);
+
+INSERT INTO COURSE VALUES('CSE132A', '1', 4, '1', 'CSE101', '1', '0', '0', '1', 'Computer Science');
+INSERT INTO COURSE VALUES('CSE291', '2', 4, '1,3', '', '1', '0', '0', '0', 'Computer Science');
+INSERT INTO COURSE VALUES('CSE101', '3', 4, '1', '', '1', '0', '0', '1', 'Computer Science');
+INSERT INTO COURSE VALUES('CSE132B', '4', 4, '1', 'CSE132A', '1', '0', '0', '1', 'Computer Science');
+INSERT INTO COURSE VALUES('CSE232A', '5', 4, '1', 'CSE132A', '1', '0', '0', '1', 'Computer Science');
+INSERT INTO COURSE VALUES('MATH101', '6', 4, '1', '', '1', '0', '0', '0', 'Mathematics');
+INSERT INTO COURSE VALUES('PHYS101', '7', 4, '1', '', '1', '0', '0', '1', 'Physics');
+INSERT INTO COURSE VALUES('BIO101', '8', 4, '1', '', '1', '0', '0', '1', 'Biology');
+INSERT INTO COURSE VALUES('CHEM101', '9', 4, '1', '', '1', '0', '0', '1', 'Chemistry');
+INSERT INTO COURSE VALUES('STAT101', '10', 4, '1', '', '1', '0', '0', '0', 'Statistics');
+INSERT INTO COURSE VALUES('CSE132C', '11', 4, '1', '', '1', '0', '0', '0', 'Computer Science');
+INSERT INTO COURSE VALUES('CSE291B', '12', 4, '1', '', '1', '0', '0', '0', 'Computer Science');
+
+INSERT INTO STUDENT VALUES ('1', '123456789', 'John', 'A', 'Doe', '1', '1', 'BSC', 'Computer Science');
+INSERT INTO STUDENT VALUES ('2', '987654321', 'Jane', 'B', 'Smith', '1', '1', 'MS', 'Computer Science');
+INSERT INTO STUDENT VALUES ('3', '567891234', 'Alice', 'C', 'Johnson', '1', '1', 'BSC', 'Computer Science');
+INSERT INTO STUDENT VALUES ('4', '234567890', 'Bob', 'D', 'Brown', '1', '1', 'BSC', 'Mathematics');
+INSERT INTO STUDENT VALUES ('5', '345678901', 'Carol', 'E', 'Davis', '1', '1', 'BSC', 'Physics');
+INSERT INTO STUDENT VALUES ('6', '456789012', 'David', 'F', 'Miller', '1', '1', 'BSC', 'Biology');
+INSERT INTO STUDENT VALUES ('7', '567890123', 'Eve', 'G', 'Wilson', '1', '1', 'BSC', 'Computer Science');
+
+
+INSERT INTO CLASS VALUES('CSE132A', 'DB System Principles', 'SPRING', '2018');
+INSERT INTO CLASS VALUES('CSE291', 'Advanced Topics in CS', 'FALL', '2017');
+INSERT INTO CLASS VALUES('CSE101', 'Introduction to Programming', 'WINTER', '2017');
+INSERT INTO CLASS VALUES('CSE132B', 'Advanced Databases', 'WINTER', '2018');
+INSERT INTO CLASS VALUES('CSE232A', 'Machine Learning Algorithms', 'SPRING', '2018');
+INSERT INTO CLASS VALUES('MATH101', 'Calculus I', 'SPRING', '2017');
+INSERT INTO CLASS VALUES('PHYS101', 'Physics I', 'FALL', '2017');
+INSERT INTO CLASS VALUES('BIO101', 'Introduction to Biology', 'SPRING', '2017');
+INSERT INTO CLASS VALUES('CHEM101', 'General Chemistry', 'FALL', '2017');
+INSERT INTO CLASS VALUES('STAT101', 'Introduction to Statistics', 'WINTER', '2018');
+INSERT INTO CLASS VALUES('CSE132A', 'DB System Principles 2', 'FALL', '2017');
+INSERT INTO CLASS VALUES('CSE291B', 'Advanced Topics in Machine Learning 2', 'WINTER', '2019');
+INSERT INTO CLASS VALUES('CSE132C', 'Database System Applications', 'SPRING', '2017');
+
+INSERT INTO SECTION VALUES ('S1', 'CSE132A', 'SPRING', 2018);
+INSERT INTO regular_meeting (SECTIONID, COURSEID, QUARTER, YEAR, day_of_week, start_time, end_time, building, type)
+VALUES ('S1', 'CSE132A', 'SPRING', 2018, 'MWF', '10:00:00', '11:00:00', 'Center Hall', 'Lecture');
+
+INSERT INTO SECTION VALUES ('S2', 'CSE291', 'FALL', 2017);
+INSERT INTO regular_meeting (SECTIONID, COURSEID, QUARTER, YEAR, day_of_week, start_time, end_time, building, type)
+VALUES ('S2', 'CSE291', 'FALL', 2017, 'MWF', '11:00:00', '12:00:00', 'Center Hall', 'Lecture');
+
+INSERT INTO SECTION VALUES ('S3', 'CSE101', 'WINTER', 2017);
+INSERT INTO regular_meeting (SECTIONID, COURSEID, QUARTER, YEAR, day_of_week, start_time, end_time, building, type)
+VALUES ('S3', 'CSE101', 'WINTER', 2017, 'MWF', '13:00:00', '14:00:00', 'Center Hall', 'Lecture');
+
+INSERT INTO SECTION VALUES ('S4', 'CSE132B', 'WINTER', 2018);
+INSERT INTO regular_meeting (SECTIONID, COURSEID, QUARTER, YEAR, day_of_week, start_time, end_time, building, type)
+VALUES ('S4', 'CSE132B', 'WINTER', 2018, 'MWF', '14:00:00', '15:00:00', 'Center Hall', 'Lecture');
+
+INSERT INTO SECTION VALUES ('S5', 'CSE232A', 'SPRING', 2018);
+INSERT INTO regular_meeting (SECTIONID, COURSEID, QUARTER, YEAR, day_of_week, start_time, end_time, building, type)
+VALUES ('S5', 'CSE232A', 'SPRING', 2018, 'MWF', '11:00:00', '12:00:00', 'Center Hall', 'Lecture');
+
+INSERT INTO SECTION VALUES ('S6', 'MATH101', 'SPRING', 2017);
+INSERT INTO regular_meeting (SECTIONID, COURSEID, QUARTER, YEAR, day_of_week, start_time, end_time, building, type)
+VALUES ('S6', 'MATH101', 'SPRING', 2017, 'MWF', '09:00:00', '10:00:00', 'Center Hall', 'Lecture');
+
+INSERT INTO SECTION VALUES ('S7', 'PHYS101', 'FALL', 2017);
+INSERT INTO regular_meeting (SECTIONID, COURSEID, QUARTER, YEAR, day_of_week, start_time, end_time, building, type)
+VALUES ('S7', 'PHYS101', 'FALL', 2017, 'MWF', '08:00:00', '09:00:00', 'Center Hall', 'Lecture');
+
+INSERT INTO SECTION VALUES ('S8', 'BIO101', 'SPRING', 2017);
+INSERT INTO regular_meeting (SECTIONID, COURSEID, QUARTER, YEAR, day_of_week, start_time, end_time, building, type)
+VALUES ('S8', 'BIO101', 'SPRING', 2017, 'MWF', '10:00:00', '11:00:00', 'Center Hall', 'Lecture');
+
+INSERT INTO SECTION VALUES ('S9', 'CHEM101', 'FALL', '2017');
+INSERT INTO regular_meeting (SECTIONID, COURSEID, QUARTER, YEAR, day_of_week, start_time, end_time, building, type)
+VALUES ('S9', 'CHEM101', 'FALL', '2017', 'MWF', '11:00:00', '12:00:00', 'Center Hall', 'Lecture');
+
+INSERT INTO SECTION VALUES ('S10', 'STAT101', 'WINTER', 2018);
+INSERT INTO regular_meeting (SECTIONID, COURSEID, QUARTER, YEAR, day_of_week, start_time, end_time, building, type)
+VALUES ('S10', 'STAT101', 'WINTER', 2018, 'MWF', '12:00:00', '13:00:00', 'Center Hall', 'Lecture');
+
+INSERT INTO SECTION VALUES ('S11', 'CSE132A', 'FALL', 2017);
+INSERT INTO regular_meeting (SECTIONID, COURSEID, QUARTER, YEAR, day_of_week, start_time, end_time, building, type)
+VALUES ('S11', 'CSE132A', 'FALL', 2017, 'MWF', '10:00:00', '11:00:00', 'Center Hall', 'Lecture');
+
+INSERT INTO SECTION VALUES ('S12', 'CSE291B', 'WINTER', 2019);
+INSERT INTO regular_meeting (SECTIONID, COURSEID, QUARTER, YEAR, day_of_week, start_time, end_time, building, type)
+VALUES ('S12', 'CSE291B', 'WINTER', 2019, 'MWF', '13:00:00', '14:00:00', 'Center Hall', 'Lecture');
+
+INSERT INTO SECTION VALUES ('S13', 'CSE132C', 'SPRING', 2017);
+INSERT INTO regular_meeting (SECTIONID, COURSEID, QUARTER, YEAR, day_of_week, start_time, end_time, building, type)
+VALUES ('S13', 'CSE132C', 'SPRING', 2017, 'MWF', '11:00:00', '12:00:00', 'Center Hall', 'Lecture');
+
+
+INSERT INTO Faculty (FACULTYNAME, TITLE, DEPARTMENT) VALUES ('Dr. Alan Turing', 'Professor', 'Computer Science');
+INSERT INTO Faculty (FACULTYNAME, TITLE, DEPARTMENT) VALUES ('Dr. Ada Lovelace', 'Professor', 'Computer Science');
+INSERT INTO Faculty (FACULTYNAME, TITLE, DEPARTMENT) VALUES ('Dr. Andrew Ng', 'Professor', 'Computer Science');
+INSERT INTO Faculty (FACULTYNAME, TITLE, DEPARTMENT) VALUES ('Dr. Geoffrey Hinton', 'Professor', 'Computer Science');
+INSERT INTO Faculty (FACULTYNAME, TITLE, DEPARTMENT) VALUES ('Dr. Carl Gauss', 'Professor', 'Computer Science');
+INSERT INTO Faculty (FACULTYNAME, TITLE, DEPARTMENT) VALUES ('Dr. Albert Einstein', 'Professor', 'Computer Science');
+INSERT INTO Faculty (FACULTYNAME, TITLE, DEPARTMENT) VALUES ('Dr. James Watson', 'Professor', 'Computer Science');
+INSERT INTO Faculty (FACULTYNAME, TITLE, DEPARTMENT) VALUES ('Dr. Marie Curie', 'Professor', 'Computer Science');
+INSERT INTO Faculty (FACULTYNAME, TITLE, DEPARTMENT) VALUES ('Dr. John Tukey', 'Professor', 'Computer Science');
+INSERT INTO Faculty (FACULTYNAME, TITLE, DEPARTMENT) VALUES ('Dr. Ian Goodfellow', 'Professor', 'Computer Science');
+INSERT INTO Faculty (FACULTYNAME, TITLE, DEPARTMENT) VALUES ('Dr Alin D', 'Professor', 'Computer Science');
+
+
+
+INSERT INTO pastclass VALUES ('1', 'CSE291', 'S2', 'FALL', 2017, 4, 1, 'A', 'Dr. Ada Lovelace');
+INSERT INTO pastclass VALUES ('1', 'CSE101', 'S3', 'WINTER', 2017, 4, 1, 'B+', 'Dr. Andrew Ng');
+INSERT INTO pastclass VALUES ('2', 'CSE101', 'S3', 'WINTER', 2017, 4, 1, 'B', 'Dr. Andrew Ng');
+INSERT INTO pastclass VALUES ('3', 'CSE132B', 'S4', 'WINTER', 2018, 4, 1, 'A-', 'Dr. Alan Turing');
+INSERT INTO pastclass VALUES ('4', 'MATH101', 'S6', 'SPRING', 2017, 4, 1, 'B+', 'Dr. Carl Gauss');
+INSERT INTO pastclass VALUES ('5', 'PHYS101', 'S7', 'FALL', 2017, 4, 1, 'A', 'Dr. Albert Einstein');
+INSERT INTO pastclass VALUES ('6', 'BIO101', 'S8', 'SPRING', 2017, 4, 1, 'A', 'Dr. James Watson');
+INSERT INTO pastclass VALUES ('7', 'CHEM101', 'S9', 'FALL', 2017, 4, 1, 'B+', 'Dr. Marie Curie');
+INSERT INTO pastclass VALUES ('1', 'STAT101', 'S10', 'WINTER', 2018, 4, 1, 'A-', 'Dr. John Tukey');
+INSERT INTO pastclass VALUES ('1', 'CSE132A', 'S11', 'FALL', 2017, 4, 1, 'A', 'Dr. Alan Turing');
+INSERT INTO pastclass VALUES ('2', 'CSE291', 'S2', 'FALL', 2017, 4, 1, 'A-', 'Dr. Ada Lovelace');
+INSERT INTO pastclass VALUES ('7', 'CSE101', 'S3', 'WINTER', 2017, 4, 1, 'A', 'Dr. Andrew Ng');
+INSERT INTO pastclass VALUES ('6', 'CSE101', 'S3', 'WINTER', 2017, 4, 1, 'A', 'Dr. Andrew Ng');
+
+INSERT INTO courseenrollment VALUES ('1', 'CSE132A', 'S1', 'SPRING', 2018, 4, 1, 'IN');
+INSERT INTO courseenrollment VALUES ('2', 'CSE132A', 'S1', 'SPRING', 2018, 4, 1, 'IN');
+INSERT INTO courseenrollment VALUES ('2', 'CSE232A', 'S5', 'SPRING', 2018, 4, 1, 'IN');
+INSERT INTO courseenrollment VALUES ('3', 'CSE132A', 'S1', 'SPRING', 2018, 4, 1, 'IN');
+INSERT INTO courseenrollment VALUES ('4', 'CSE132A', 'S1', 'SPRING', 2018, 4, 1, 'IN');
+INSERT INTO courseenrollment VALUES ('5', 'CSE132A', 'S1', 'SPRING', 2018, 4, 1, 'IN');
+INSERT INTO courseenrollment VALUES ('6', 'CSE132A', 'S1', 'SPRING', 2018, 4, 1, 'IN');
+INSERT INTO courseenrollment VALUES ('7', 'CSE132A', 'S1', 'SPRING', 2018, 4, 1, 'IN');
+
+
+
+
+

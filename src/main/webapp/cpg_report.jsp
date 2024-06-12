@@ -28,7 +28,7 @@
             statement = connection.createStatement();
 
             // Query to get student information
-            String studentQuery = "SELECT * FROM CPQG ORDER BY COURSEID";
+            String studentQuery = "SELECT * FROM CPG ORDER BY COURSEID";
             resultSet = statement.executeQuery(studentQuery);
     %>
     <table border="1">

@@ -76,7 +76,7 @@ connection.setAutoCommit(false);
 // Create the prepared statement and use it to
 // UPDATE the student attributes in the Student table.
 PreparedStatement pstatement = connection.prepareStatement(
-"UPDATE PASTCLASS SET unit = ?, GRADEOPTION = ?, GRADE = ?, facultyname = ? WHERE STUDENTID = ? AND COURSEID = ? AND SECTIONID = ? AND QUARTER = ? AND YEAR = ? ");
+"UPDATE PASTCLASS SET unit = ?, GRADEOPTION = ?, GRADE = ?, FACULTYNAME = ? WHERE STUDENTID = ? AND COURSEID = ? AND SECTIONID = ? AND QUARTER = ? AND YEAR = ? ");
 pstatement.setInt(1, Integer.parseInt(request.getParameter("unit")));
 pstatement.setInt(2, Integer.parseInt(request.getParameter("GRADEOPTION")));
 pstatement.setString(3, request.getParameter("GRADE"));
@@ -132,7 +132,7 @@ while ( rs.next() ) {
 <td><input value="<%= rs.getInt("unit") %>" name="unit"></td>
 <td><input value="<%= rs.getInt("GRADEOPTION") %>" name="GRADEOPTION"></td>
 <td><input value="<%= rs.getString("GRADE") %>" name="GRADE"></td>
-<td><input value="<%= rs.getString("facultyname") %>" name="GRADE"></td>
+<td><input value="<%= rs.getString("facultyname") %>" name="facultyname"></td>
 <td><input type="submit" value="Update"></td>
 </form>
 <form action="pastclasses.jsp" method="get">

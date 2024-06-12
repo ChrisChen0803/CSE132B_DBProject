@@ -101,7 +101,7 @@ INSERT INTO regular_meeting (SECTIONID, COURSEID, QUARTER, YEAR, day_of_week, st
 VALUES ('S1', 'CSE132A', 'SPRING', 2018, 'MWF', '10:00:00', '11:00:00', 'Center Hall', 'Lecture');
 
 INSERT INTO SECTION VALUES ('S2', 'CSE291', 'FALL', 2017, 'Dr. Ada Lovelace');
-INSERT INTO regular_meeting (SECTIONID, COURSEID, QUARTER, YEAR, d 4ay_of_week, start_time, end_time, building, type)
+INSERT INTO regular_meeting (SECTIONID, COURSEID, QUARTER, YEAR, day_of_week, start_time, end_time, building, type)
 VALUES ('S2', 'CSE291', 'FALL', 2017, 'MWF', '11:00:00', '12:00:00', 'Center Hall', 'Lecture');
 
 INSERT INTO SECTION VALUES ('S3', 'CSE101', 'WINTER', 2017, 'Dr. Andrew Ng');

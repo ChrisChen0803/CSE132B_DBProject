@@ -225,4 +225,352 @@ BEFORE INSERT OR UPDATE ON REGULAR_MEETING
 FOR EACH ROW
 EXECUTE FUNCTION trg_time_conflict();
 
+CREATE OR REPLACE FUNCTION trg_enrollment_limit()
+RETURNS TRIGGER AS $$
+DECLARE
+    enroll_limit INTEGER;
+    current_enrollment INTEGER;
+BEGIN
+    SELECT s.enrollment_limit
+    INTO enroll_limit
+    FROM section s
+    WHERE s.sectionid = NEW.sectionid
+      AND s.courseid = NEW.courseid
+	  AND s.quarter = 'SPRING'
+	  AND s.Year = 2018;
 
+    SELECT COUNT(*)
+    INTO current_enrollment
+    FROM courseenrollment
+    WHERE sectionid = NEW.sectionid
+      AND courseid = NEW.courseid;
+
+    IF current_enrollment >= enroll_limit THEN
+        RAISE EXCEPTION 'Enrollment limit for the section has been reached.';
+    END IF;
+
+    RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE OR REPLACE TRIGGER trg_enrollment_limit
+BEFORE INSERT OR UPDATE ON courseenrollment
+FOR EACH ROW
+EXECUTE FUNCTION trg_enrollment_limit();
+
+CREATE OR REPLACE FUNCTION trg_check_professor_schedule()
+RETURNS TRIGGER AS $$
+BEGIN
+    IF EXISTS (
+        SELECT 1
+        FROM regular_meeting m
+        JOIN section s ON m.sectionid = s.sectionid AND m.courseid = s.courseid
+        WHERE m.quarter = 'SPRING' AND m.year = 2018
+          AND s.facultyname = (
+              SELECT facultyname
+              FROM section
+              WHERE sectionid = NEW.sectionid
+                AND courseid = NEW.courseid
+                AND quarter = 'SPRING'
+                AND year = 2018
+          )
+          AND (m.day_of_week SIMILAR TO '%' || NEW.day_of_week || '%' OR '%' || m.day_of_week || '%' SIMILAR TO NEW.day_of_week)
+          AND (
+                 (NEW.end_time <= m.end_time AND NEW.end_time >= m.start_time)
+              OR (m.start_time <= NEW.start_time AND m.end_time >= NEW.start_time)
+              OR (NEW.start_time <= m.start_time AND NEW.end_time >= m.end_time)
+          )
+    ) THEN
+        RAISE EXCEPTION 'Professor has another section at the same time.';
+    END IF;
+    RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE OR REPLACE TRIGGER trg_check_professor_schedule
+BEFORE INSERT OR UPDATE ON regular_meeting
+FOR EACH ROW
+EXECUTE FUNCTION trg_check_professor_schedule();
+
+
+
+
+
+DROP TABLE IF EXISTS CPQG CASCADE;
+	CREATE TABLE CPQG (
+    courseid VARCHAR(50),
+    facultyname VARCHAR(50),
+    quarter VARCHAR(20),
+	YEAR INT,
+    grade VARCHAR(10),
+    count INTEGER,
+    PRIMARY KEY (courseid, facultyname, quarter, YEAR, grade)
+);
+
+
+INSERT INTO CPQG (courseid, facultyname, quarter, YEAR, grade, count)
+SELECT
+    pc.courseid,
+    pc.facultyname,
+    pc.quarter,
+	pc.year,
+    'A' AS grade,
+    COUNT(*) AS count
+FROM PASTCLASS pc
+WHERE pc.grade IN ('A', 'A-', 'A+')
+GROUP BY pc.courseid, pc.facultyname, pc.quarter, pc.year
+UNION ALL
+SELECT
+    pc.courseid,
+    pc.facultyname,
+    pc.quarter,
+	pc.year,
+    'B' AS grade,
+    COUNT(*) AS count
+FROM PASTCLASS pc
+WHERE pc.grade IN ('B', 'B-', 'B+')
+GROUP BY pc.courseid, pc.facultyname, pc.quarter,pc.year
+UNION ALL
+SELECT
+    pc.courseid,
+    pc.facultyname,
+    pc.quarter,
+	pc.year,
+    'C' AS grade,
+    COUNT(*) AS count
+FROM PASTCLASS pc
+WHERE pc.grade IN ('C', 'C-', 'C+')
+GROUP BY pc.courseid, pc.facultyname, pc.quarter,pc.year
+UNION ALL
+SELECT
+    pc.courseid,
+    pc.facultyname,
+    pc.quarter,
+	pc.year,
+    'D' AS grade,
+    COUNT(*) AS count
+FROM PASTCLASS pc
+WHERE pc.grade = 'D'
+GROUP BY pc.courseid, pc.facultyname, pc.quarter,pc.year
+UNION ALL
+SELECT
+    pc.courseid,
+    pc.facultyname,
+    pc.quarter,
+	pc.year,
+    'other' AS grade,
+    COUNT(*) AS count
+FROM PASTCLASS pc
+WHERE pc.grade NOT IN ('A', 'A-', 'A+', 'B', 'B-', 'B+', 'C', 'C-', 'C+', 'D', 'IN')
+GROUP BY pc.courseid, pc.facultyname, pc.quarter,pc.year;
+
+
+
+
+CREATE OR REPLACE FUNCTION trg_cpqg_after_insert()
+RETURNS TRIGGER AS $$
+BEGIN
+    INSERT INTO CPQG (courseid, facultyname, quarter, year, grade, count)
+    VALUES (
+        NEW.courseid,
+        NEW.facultyname,
+        NEW.quarter,
+        NEW.year,
+        CASE
+            WHEN NEW.grade IN ('A', 'A-', 'A+') THEN 'A'
+            WHEN NEW.grade IN ('B', 'B-', 'B+') THEN 'B'
+            WHEN NEW.grade IN ('C', 'C-', 'C+') THEN 'C'
+            WHEN NEW.grade = 'D' THEN 'D'
+            ELSE 'other'
+        END,
+        1
+    )
+    ON CONFLICT (courseid, facultyname, quarter, year, grade)
+    DO UPDATE SET count = CPQG.count + 1;
+
+    RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+
+
+
+
+
+
+
+CREATE OR REPLACE FUNCTION trg_cpqg_after_update()
+RETURNS TRIGGER AS $$
+BEGIN
+    IF (OLD.grade != NEW.grade) THEN
+        UPDATE CPQG
+        SET count = count - 1
+        WHERE courseid = OLD.courseid
+          AND facultyname = OLD.facultyname
+          AND quarter = OLD.quarter
+          AND year = OLD.year
+          AND grade = CASE
+                          WHEN OLD.grade IN ('A', 'A-', 'A+') THEN 'A'
+                          WHEN OLD.grade IN ('B', 'B-', 'B+') THEN 'B'
+                          WHEN OLD.grade IN ('C', 'C-', 'C+') THEN 'C'
+                          WHEN OLD.grade = 'D' THEN 'D'
+                          ELSE 'other'
+                      END;
+
+
+
+
+        INSERT INTO CPQG (courseid, facultyname, quarter,year, grade, count)
+        VALUES (
+            NEW.courseid,
+            NEW.facultyname,
+            NEW.quarter,
+	NEW.year,
+            CASE
+                WHEN NEW.grade IN ('A', 'A-', 'A+') THEN 'A'
+                WHEN NEW.grade IN ('B', 'B-', 'B+') THEN 'B'
+                WHEN NEW.grade IN ('C', 'C-', 'C+') THEN 'C'
+                WHEN NEW.grade = 'D' THEN 'D'
+                ELSE 'other'
+            END,
+            1
+        )
+        ON CONFLICT (courseid, facultyname, quarter, year, grade)
+        DO UPDATE SET count = CPQG.count + 1;
+    END IF;
+
+    RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+
+CREATE OR REPLACE FUNCTION trg_cpqg_after_delete()
+RETURNS TRIGGER AS $$
+BEGIN
+    UPDATE CPQG
+    SET count = count - 1
+    WHERE courseid = OLD.courseid
+      AND facultyname = OLD.facultyname
+      AND quarter = OLD.quarter
+     AND year = OLD.year
+      AND grade = CASE
+                      WHEN OLD.grade IN ('A', 'A-', 'A+') THEN 'A'
+                      WHEN OLD.grade IN ('B', 'B-', 'B+') THEN 'B'
+                      WHEN OLD.grade IN ('C', 'C-', 'C+') THEN 'C'
+                      WHEN OLD.grade = 'D' THEN 'D'
+                      ELSE 'other'
+                  END;
+
+
+
+
+    RETURN OLD;
+END;
+$$ LANGUAGE plpgsql;
+
+
+CREATE OR REPLACE TRIGGER trg_cpqg_after_insert
+AFTER INSERT ON PASTCLASS
+FOR EACH ROW
+EXECUTE FUNCTION trg_cpqg_after_insert();
+CREATE OR REPLACE TRIGGER trg_cpqg_after_update
+AFTER UPDATE ON PASTCLASS
+FOR EACH ROW
+EXECUTE FUNCTION trg_cpqg_after_update();
+CREATE OR REPLACE TRIGGER trg_cpqg_after_delete
+AFTER DELETE ON PASTCLASS
+FOR EACH ROW
+EXECUTE FUNCTION trg_cpqg_after_delete();
+
+
+
+
+
+CREATE TABLE CPG (
+    courseid VARCHAR(50),
+    facultyname VARCHAR(50),
+    grade VARCHAR(10),
+    count INTEGER,
+    PRIMARY KEY (courseid, facultyname, grade)
+);
+
+
+
+
+INSERT INTO CPG (courseid, facultyname, grade, count)
+SELECT
+    courseid,
+    facultyname,
+    grade,
+    COUNT(*) AS count
+FROM PASTCLASS
+GROUP BY courseid, facultyname, grade;
+
+
+
+
+CREATE OR REPLACE FUNCTION trg_cpg_after_insert()
+RETURNS TRIGGER AS $$
+BEGIN
+    INSERT INTO CPG (courseid, facultyname, grade, count)
+    VALUES (NEW.courseid, NEW.facultyname, NEW.grade, 1)
+    ON CONFLICT (courseid, facultyname, grade)
+    DO UPDATE SET count = CPG.count + 1;
+    RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+
+
+
+CREATE OR REPLACE FUNCTION trg_cpg_after_update()
+RETURNS TRIGGER AS $$
+BEGIN
+    IF (OLD.grade != NEW.grade) THEN
+        UPDATE CPG
+        SET count = count - 1
+        WHERE courseid = OLD.courseid
+          AND facultyname = OLD.facultyname
+          AND grade = OLD.grade;
+
+        INSERT INTO CPG (courseid, facultyname, grade, count)
+        VALUES (NEW.courseid, NEW.facultyname, NEW.grade, 1)
+        ON CONFLICT (courseid, facultyname, grade)
+        DO UPDATE SET count = CPG.count + 1;
+    END IF;
+    RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+
+
+
+CREATE OR REPLACE FUNCTION trg_cpg_after_delete()
+RETURNS TRIGGER AS $$
+BEGIN
+    UPDATE CPG
+    SET count = count - 1
+    WHERE courseid = OLD.courseid
+      AND facultyname = OLD.facultyname
+      AND grade = OLD.grade;
+
+
+
+
+    RETURN OLD;
+END;
+$$ LANGUAGE plpgsql;
+
+
+CREATE OR REPLACE TRIGGER trg_cpg_after_insert
+AFTER INSERT ON PASTCLASS
+FOR EACH ROW
+EXECUTE FUNCTION trg_cpg_after_insert();
+CREATE OR REPLACE TRIGGER trg_cpg_after_update
+AFTER UPDATE ON PASTCLASS
+FOR EACH ROW
+EXECUTE FUNCTION trg_cpg_after_update();
+CREATE OR REPLACE TRIGGER trg_cpg_after_delete
+AFTER DELETE ON PASTCLASS
+FOR EACH ROW
+EXECUTE FUNCTION trg_cpg_after_delete();

@@ -14,9 +14,9 @@
                     Class.forName("org.postgresql.Driver");
 
                     // Establish connection to the database
-                    String url = "jdbc:postgresql://localhost:5433/CSE132B";
+                    String url = "jdbc:postgresql://localhost:5432/CSE132B";
                     String username = "postgres";
-                    String password = "xbxjj";
+                    String password = "Cyj020803!";
                     connection = DriverManager.getConnection(url, username, password);
                 %>
                 <table>
@@ -36,7 +36,7 @@
                 <tr>
                 <form action="regular_meeting.jsp" method="get">
                 <input type="hidden" value="insert" name="action">
-                <th><input value="" name="MEETINGID" size="10"></th>
+                <th></th>
                 <th><input value="" name="SECTIONID" size="10"></th>
                 <th><input value="" name="COURSEID" size="10"></th>
                 <th><input value="" name="QUARTER" size="10"></th>
@@ -57,17 +57,16 @@
                     // Create the prepared statement and use it to
                     // INSERT the student attrs INTO the Student table.
                     PreparedStatement pstmt = connection.prepareStatement(
-                    ("INSERT INTO REGULAR_MEETING VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"));
-                    pstmt.setInt(1, Integer.parseInt(request.getParameter("MEETINGID")));
-                    pstmt.setString(2, request.getParameter("SECTIONID"));
-                    pstmt.setString(3, request.getParameter("COURSEID"));
-                    pstmt.setString(4, request.getParameter("QUARTER"));
-                    pstmt.setInt(5, Integer.parseInt(request.getParameter("YEAR")));
-                    pstmt.setString(6, request.getParameter("DAY_OF_WEEK"));
-                    pstmt.setTime(7, java.sql.Time.valueOf(request.getParameter("START_TIME"))); // Assuming time format is correct
-                    pstmt.setTime(8, java.sql.Time.valueOf(request.getParameter("END_TIME"))); // Assuming time format is correct
-                    pstmt.setString(9, request.getParameter("BUILDING"));
-                    pstmt.setString(10, request.getParameter("TYPE"));
+                    ("INSERT INTO REGULAR_MEETING (SECTIONID, COURSEID, QUARTER, YEAR, DAY_OF_WEEK, START_TIME, END_TIME, BUILDING, TYPE) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)"));
+                    pstmt.setString(1, request.getParameter("SECTIONID"));
+                    pstmt.setString(2, request.getParameter("COURSEID"));
+                    pstmt.setString(3, request.getParameter("QUARTER"));
+                    pstmt.setInt(4, Integer.parseInt(request.getParameter("YEAR")));
+                    pstmt.setString(5, request.getParameter("DAY_OF_WEEK"));
+                    pstmt.setTime(6, java.sql.Time.valueOf(request.getParameter("START_TIME"))); // Assuming time format is correct
+                    pstmt.setTime(7, java.sql.Time.valueOf(request.getParameter("END_TIME"))); // Assuming time format is correct
+                    pstmt.setString(8, request.getParameter("BUILDING"));
+                    pstmt.setString(9, request.getParameter("TYPE"));
                     pstmt.executeUpdate();
                     connection.commit();
                     connection.setAutoCommit(true);

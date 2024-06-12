@@ -85,7 +85,7 @@
         // Create the prepared statement and use it to
         // DELETE the student FROM the Student table.
         PreparedStatement pstmt = connection.prepareStatement(
-        "DELETE FROM SECTION WHERE SECTIONID = ? COURSEID = ? AND QUARTER = ? AND YEAR = ?");
+        "DELETE FROM SECTION WHERE SECTIONID = ? AND COURSEID = ? AND QUARTER = ? AND YEAR = ?");
         pstmt.setString(1,request.getParameter("SECTIONID"));
         pstmt.setString(2,request.getParameter("COURSEID"));
         pstmt.setString(3, request.getParameter("QUARTER"));

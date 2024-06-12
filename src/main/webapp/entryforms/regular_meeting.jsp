@@ -1,4 +1,7 @@
 <html>
+    <head>
+        <title>Regular Meeting</title>
+    </head>
     <body>
         <table>
             <tr>

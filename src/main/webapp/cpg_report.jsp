@@ -6,7 +6,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>CPQG</title>
+    <title>CPG</title>
 </head>
 <body>
     <%

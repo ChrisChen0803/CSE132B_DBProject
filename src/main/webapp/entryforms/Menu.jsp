@@ -32,5 +32,8 @@
 <li>
 <a href="degreerequirements.jsp">degreerequirements<a>
 </li>
+<li>
+<a href="section.jsp">Section<a>
+</li>
 </ul>
 </html>

@@ -82,60 +82,7 @@ INSERT INTO CLASS VALUES('CHEM101', 'General Chemistry', 'FALL', '2017');
 INSERT INTO CLASS VALUES('STAT101', 'Introduction to Statistics', 'WINTER', '2018');
 INSERT INTO CLASS VALUES('CSE132A', 'DB System Principles 2', 'FALL', '2017');
 INSERT INTO CLASS VALUES('CSE291B', 'Advanced Topics in Machine Learning 2', 'WINTER', '2019');
-INSERT INTO CLASS VALUES('CSE132C', 'Database System Applications', 'SPRING', '2017');
-
-INSERT INTO SECTION VALUES ('S1', 'CSE132A', 'SPRING', 2018);
-INSERT INTO regular_meeting (SECTIONID, COURSEID, QUARTER, YEAR, day_of_week, start_time, end_time, building, type)
-VALUES ('S1', 'CSE132A', 'SPRING', 2018, 'MWF', '10:00:00', '11:00:00', 'Center Hall', 'Lecture');
-
-INSERT INTO SECTION VALUES ('S2', 'CSE291', 'FALL', 2017);
-INSERT INTO regular_meeting (SECTIONID, COURSEID, QUARTER, YEAR, day_of_week, start_time, end_time, building, type)
-VALUES ('S2', 'CSE291', 'FALL', 2017, 'MWF', '11:00:00', '12:00:00', 'Center Hall', 'Lecture');
-
-INSERT INTO SECTION VALUES ('S3', 'CSE101', 'WINTER', 2017);
-INSERT INTO regular_meeting (SECTIONID, COURSEID, QUARTER, YEAR, day_of_week, start_time, end_time, building, type)
-VALUES ('S3', 'CSE101', 'WINTER', 2017, 'MWF', '13:00:00', '14:00:00', 'Center Hall', 'Lecture');
-
-INSERT INTO SECTION VALUES ('S4', 'CSE132B', 'WINTER', 2018);
-INSERT INTO regular_meeting (SECTIONID, COURSEID, QUARTER, YEAR, day_of_week, start_time, end_time, building, type)
-VALUES ('S4', 'CSE132B', 'WINTER', 2018, 'MWF', '14:00:00', '15:00:00', 'Center Hall', 'Lecture');
-
-INSERT INTO SECTION VALUES ('S5', 'CSE232A', 'SPRING', 2018);
-INSERT INTO regular_meeting (SECTIONID, COURSEID, QUARTER, YEAR, day_of_week, start_time, end_time, building, type)
-VALUES ('S5', 'CSE232A', 'SPRING', 2018, 'MWF', '11:00:00', '12:00:00', 'Center Hall', 'Lecture');
-
-INSERT INTO SECTION VALUES ('S6', 'MATH101', 'SPRING', 2017);
-INSERT INTO regular_meeting (SECTIONID, COURSEID, QUARTER, YEAR, day_of_week, start_time, end_time, building, type)
-VALUES ('S6', 'MATH101', 'SPRING', 2017, 'MWF', '09:00:00', '10:00:00', 'Center Hall', 'Lecture');
-
-INSERT INTO SECTION VALUES ('S7', 'PHYS101', 'FALL', 2017);
-INSERT INTO regular_meeting (SECTIONID, COURSEID, QUARTER, YEAR, day_of_week, start_time, end_time, building, type)
-VALUES ('S7', 'PHYS101', 'FALL', 2017, 'MWF', '08:00:00', '09:00:00', 'Center Hall', 'Lecture');
-
-INSERT INTO SECTION VALUES ('S8', 'BIO101', 'SPRING', 2017);
-INSERT INTO regular_meeting (SECTIONID, COURSEID, QUARTER, YEAR, day_of_week, start_time, end_time, building, type)
-VALUES ('S8', 'BIO101', 'SPRING', 2017, 'MWF', '10:00:00', '11:00:00', 'Center Hall', 'Lecture');
-
-INSERT INTO SECTION VALUES ('S9', 'CHEM101', 'FALL', '2017');
-INSERT INTO regular_meeting (SECTIONID, COURSEID, QUARTER, YEAR, day_of_week, start_time, end_time, building, type)
-VALUES ('S9', 'CHEM101', 'FALL', '2017', 'MWF', '11:00:00', '12:00:00', 'Center Hall', 'Lecture');
-
-INSERT INTO SECTION VALUES ('S10', 'STAT101', 'WINTER', 2018);
-INSERT INTO regular_meeting (SECTIONID, COURSEID, QUARTER, YEAR, day_of_week, start_time, end_time, building, type)
-VALUES ('S10', 'STAT101', 'WINTER', 2018, 'MWF', '12:00:00', '13:00:00', 'Center Hall', 'Lecture');
-
-INSERT INTO SECTION VALUES ('S11', 'CSE132A', 'FALL', 2017);
-INSERT INTO regular_meeting (SECTIONID, COURSEID, QUARTER, YEAR, day_of_week, start_time, end_time, building, type)
-VALUES ('S11', 'CSE132A', 'FALL', 2017, 'MWF', '10:00:00', '11:00:00', 'Center Hall', 'Lecture');
-
-INSERT INTO SECTION VALUES ('S12', 'CSE291B', 'WINTER', 2019);
-INSERT INTO regular_meeting (SECTIONID, COURSEID, QUARTER, YEAR, day_of_week, start_time, end_time, building, type)
-VALUES ('S12', 'CSE291B', 'WINTER', 2019, 'MWF', '13:00:00', '14:00:00', 'Center Hall', 'Lecture');
-
-INSERT INTO SECTION VALUES ('S13', 'CSE132C', 'SPRING', 2017);
-INSERT INTO regular_meeting (SECTIONID, COURSEID, QUARTER, YEAR, day_of_week, start_time, end_time, building, type)
-VALUES ('S13', 'CSE132C', 'SPRING', 2017, 'MWF', '11:00:00', '12:00:00', 'Center Hall', 'Lecture');
-
+INSERT INTO CLASS VALUES('CSE132C', 'Database System Applications', 'SPRING', '2018');
 
 INSERT INTO Faculty (FACULTYNAME, TITLE, DEPARTMENT) VALUES ('Dr. Alan Turing', 'Professor', 'Computer Science');
 INSERT INTO Faculty (FACULTYNAME, TITLE, DEPARTMENT) VALUES ('Dr. Ada Lovelace', 'Professor', 'Computer Science');
@@ -148,6 +95,59 @@ INSERT INTO Faculty (FACULTYNAME, TITLE, DEPARTMENT) VALUES ('Dr. Marie Curie', 
 INSERT INTO Faculty (FACULTYNAME, TITLE, DEPARTMENT) VALUES ('Dr. John Tukey', 'Professor', 'Computer Science');
 INSERT INTO Faculty (FACULTYNAME, TITLE, DEPARTMENT) VALUES ('Dr. Ian Goodfellow', 'Professor', 'Computer Science');
 INSERT INTO Faculty (FACULTYNAME, TITLE, DEPARTMENT) VALUES ('Dr Alin D', 'Professor', 'Computer Science');
+
+INSERT INTO SECTION VALUES ('S1', 'CSE132A', 'SPRING', 2018, 'Dr. Alan Turing', 1);
+INSERT INTO regular_meeting (SECTIONID, COURSEID, QUARTER, YEAR, day_of_week, start_time, end_time, building, type)
+VALUES ('S1', 'CSE132A', 'SPRING', 2018, 'MWF', '10:00:00', '11:00:00', 'Center Hall', 'Lecture');
+
+INSERT INTO SECTION VALUES ('S2', 'CSE291', 'FALL', 2017, 'Dr. Ada Lovelace');
+INSERT INTO regular_meeting (SECTIONID, COURSEID, QUARTER, YEAR, day_of_week, start_time, end_time, building, type)
+VALUES ('S2', 'CSE291', 'FALL', 2017, 'MWF', '11:00:00', '12:00:00', 'Center Hall', 'Lecture');
+
+INSERT INTO SECTION VALUES ('S3', 'CSE101', 'WINTER', 2017, 'Dr. Andrew Ng');
+INSERT INTO regular_meeting (SECTIONID, COURSEID, QUARTER, YEAR, day_of_week, start_time, end_time, building, type)
+VALUES ('S3', 'CSE101', 'WINTER', 2017, 'MWF', '13:00:00', '14:00:00', 'Center Hall', 'Lecture');
+
+INSERT INTO SECTION VALUES ('S4', 'CSE132B', 'WINTER', 2018, 'Dr. Alan Turing');
+INSERT INTO regular_meeting (SECTIONID, COURSEID, QUARTER, YEAR, day_of_week, start_time, end_time, building, type)
+VALUES ('S4', 'CSE132B', 'WINTER', 2018, 'MWF', '14:00:00', '15:00:00', 'Center Hall', 'Lecture');
+
+INSERT INTO SECTION VALUES ('S5', 'CSE232A', 'SPRING', 2018, 'Dr. Geoffrey Hinton');
+INSERT INTO regular_meeting (SECTIONID, COURSEID, QUARTER, YEAR, day_of_week, start_time, end_time, building, type)
+VALUES ('S5', 'CSE232A', 'SPRING', 2018, 'MWF', '11:00:00', '12:00:00', 'Center Hall', 'Lecture');
+
+INSERT INTO SECTION VALUES ('S6', 'MATH101', 'SPRING', 2017, 'Dr. Carl Gauss');
+INSERT INTO regular_meeting (SECTIONID, COURSEID, QUARTER, YEAR, day_of_week, start_time, end_time, building, type)
+VALUES ('S6', 'MATH101', 'SPRING', 2017, 'MWF', '09:00:00', '10:00:00', 'Center Hall', 'Lecture');
+
+INSERT INTO SECTION VALUES ('S7', 'PHYS101', 'FALL', 2017, 'Dr. Albert Einstein');
+INSERT INTO regular_meeting (SECTIONID, COURSEID, QUARTER, YEAR, day_of_week, start_time, end_time, building, type)
+VALUES ('S7', 'PHYS101', 'FALL', 2017, 'MWF', '08:00:00', '09:00:00', 'Center Hall', 'Lecture');
+
+INSERT INTO SECTION VALUES ('S8', 'BIO101', 'SPRING', 2017, 'Dr. James Watson');
+INSERT INTO regular_meeting (SECTIONID, COURSEID, QUARTER, YEAR, day_of_week, start_time, end_time, building, type)
+VALUES ('S8', 'BIO101', 'SPRING', 2017, 'MWF', '10:00:00', '11:00:00', 'Center Hall', 'Lecture');
+
+INSERT INTO SECTION VALUES ('S9', 'CHEM101', 'FALL', '2017', 'Dr. Marie Curie');
+INSERT INTO regular_meeting (SECTIONID, COURSEID, QUARTER, YEAR, day_of_week, start_time, end_time, building, type)
+VALUES ('S9', 'CHEM101', 'FALL', '2017', 'MWF', '11:00:00', '12:00:00', 'Center Hall', 'Lecture');
+
+INSERT INTO SECTION VALUES ('S10', 'STAT101', 'WINTER', 2018, 'Dr. John Tukey');
+INSERT INTO regular_meeting (SECTIONID, COURSEID, QUARTER, YEAR, day_of_week, start_time, end_time, building, type)
+VALUES ('S10', 'STAT101', 'WINTER', 2018, 'MWF', '12:00:00', '13:00:00', 'Center Hall', 'Lecture');
+
+INSERT INTO SECTION VALUES ('S11', 'CSE132A', 'FALL', 2017, 'Dr. Alan Turing');
+INSERT INTO regular_meeting (SECTIONID, COURSEID, QUARTER, YEAR, day_of_week, start_time, end_time, building, type)
+VALUES ('S11', 'CSE132A', 'FALL', 2017, 'MWF', '10:00:00', '11:00:00', 'Center Hall', 'Lecture');
+
+INSERT INTO SECTION VALUES ('S12', 'CSE291B', 'WINTER', 2019, 'Dr. Ian Goodfellow');
+INSERT INTO regular_meeting (SECTIONID, COURSEID, QUARTER, YEAR, day_of_week, start_time, end_time, building, type)
+VALUES ('S12', 'CSE291B', 'WINTER', 2019, 'MWF', '13:00:00', '14:00:00', 'Center Hall', 'Lecture');
+
+INSERT INTO SECTION VALUES ('S13', 'CSE132C', 'SPRING', 2018, 'Dr Alin D');
+INSERT INTO regular_meeting (SECTIONID, COURSEID, QUARTER, YEAR, day_of_week, start_time, end_time, building, type)
+VALUES ('S13', 'CSE132C', 'SPRING', 2018, 'MWF', '11:00:00', '12:00:00', 'Center Hall', 'Lecture');
+
 
 
 

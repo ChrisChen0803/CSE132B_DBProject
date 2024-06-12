@@ -14,9 +14,9 @@
                     Class.forName("org.postgresql.Driver");
 
                     // Establish connection to the database
-                    String url = "jdbc:postgresql://localhost:5432/CSE132B";
+                    String url = "jdbc:postgresql://localhost:5433/CSE132B";
                     String username = "postgres";
-                    String password = "Cyj020803!";
+                    String password = "xbxjj";
                     connection = DriverManager.getConnection(url, username, password);
                 %>
                 <table>
@@ -39,13 +39,13 @@
                 <th><input value="" name="MEETINGID" size="10"></th>
                 <th><input value="" name="SECTIONID" size="10"></th>
                 <th><input value="" name="COURSEID" size="10"></th>
-                <th><input value="" name="QUARTER" size="15"></th>
-                <th><input value="" name="YEAR" size="15"></th>
-                <th><input value="" name="DAY_OF_WEEK" size="15"></th>
-                <th><input value="" name="START_TIME" size="15"></th>
-                <th><input value="" name="END_TIME" size="15"></th>
-                <th><input value="" name="BUILDING" size="15"></th>
-                <th><input value="" name="TYPE" size="15"></th>
+                <th><input value="" name="QUARTER" size="10"></th>
+                <th><input value="" name="YEAR" size="10"></th>
+                <th><input value="" name="DAY_OF_WEEK" size="10"></th>
+                <th><input value="" name="START_TIME" size="10"></th>
+                <th><input value="" name="END_TIME" size="10"></th>
+                <th><input value="" name="BUILDING" size="10"></th>
+                <th><input value="" name="TYPE" size="10"></th>
                 <th><input type="submit" value="Insert"></th>
                 </form>
                 </tr>
@@ -77,23 +77,20 @@
     // Check if an update is requested
     if (action != null && action.equals("update")) {
         connection.setAutoCommit(false);
-        // Create the prepared statement and use it to
-        // UPDATE the student attributes in the Student table.
-        PreparedStatement pstatement = connection.prepareStatement(
-        "UPDATE regular_meeting SET sectionid = ?, courseid = ?, quarter = ?, year = ?, day_of_week = ?, start_time = ? " +
-        "end_time = ?, building = ?, type = ? WHERE meetingid");
-        pstatement.setString(1, request.getParameter("SECTIONID"));
-        pstatement.setString(2, request.getParameter("COURSEID"));
-        pstatement.setString(3, request.getParameter("QUARTER"));
-        pstatement.setInt(4, Integer.parseInt(request.getParameter("YEAR")));
-        pstatement.setString(5,request.getParameter("DAY_OF_WEEK"));
-        pstatement.setString(6, request.getParameter("START_TIME"));
-        pstatement.setString(7, request.getParameter("END_TIME"));
-        pstatement.setString(8, request.getParameter("TYPE"));
-        pstatement.setInt(9, Integer.parseInt(request.getParameter("MEETINGID")));
-
-        int rowCount = pstatement.executeUpdate();
-        connection.setAutoCommit(false);
+        PreparedStatement pstmt = connection.prepareStatement(
+        "UPDATE REGULAR_MEETING SET SECTIONID = ?, COURSEID = ?, QUARTER = ?, YEAR = ?, DAY_OF_WEEK = ?, START_TIME = ?, END_TIME = ?, BUILDING = ?, TYPE = ? WHERE MEETINGID = ?");
+        pstmt.setString(1, request.getParameter("SECTIONID"));
+        pstmt.setString(2, request.getParameter("COURSEID"));
+        pstmt.setString(3, request.getParameter("QUARTER"));
+        pstmt.setInt(4, Integer.parseInt(request.getParameter("YEAR")));
+        pstmt.setString(5, request.getParameter("DAY_OF_WEEK"));
+        pstmt.setTime(6, java.sql.Time.valueOf(request.getParameter("START_TIME"))); // Assuming time format is correct
+        pstmt.setTime(7, java.sql.Time.valueOf(request.getParameter("END_TIME"))); // Assuming time format is correct
+        pstmt.setString(8, request.getParameter("BUILDING"));
+        pstmt.setString(9, request.getParameter("TYPE"));
+        pstmt.setInt(10, Integer.parseInt(request.getParameter("MEETINGID")));
+        pstmt.executeUpdate();
+        connection.commit();
         connection.setAutoCommit(true);
     }
     // Check if a delete is requested
@@ -124,16 +121,16 @@
         <tr>
         <form action="regular_meeting.jsp" method="get">
         <input type="hidden" value="update" name="action">
-        <td><input value="<%= rs.getInt("MEETINGID") %>" name="MEETINGID"></td>
-        <td><input value="<%= rs.getString("SECTIONID") %>" name="SECTIONID"></td>
-        <td><input value="<%= rs.getString("COURSEID") %>" name="COURSEID"></td>
-        <td><input value="<%= rs.getString("QUARTER") %>" name="QUARTER"></td>
-        <td><input value="<%= rs.getInt("YEAR") %>" name="YEAR"></td>
-        <td><input value="<%= rs.getString("DAY_OF_WEEK") %>" name="DAY_OF_WEEK"></td>
-        <td><input value="<%= rs.getString("START_TIME") %>" name="START_TIME"></td>
-        <td><input value="<%= rs.getString("END_TIME") %>" name="END_TIME"></td>
-        <td><input value="<%= rs.getString("BUILDING") %>" name="BUILDING"></td>
-        <td><input value="<%= rs.getString("TYPE") %>" name="TYPE"></td>
+        <td><input value="<%= rs.getInt("MEETINGID") %>" name="MEETINGID" size="10"></td>
+        <td><input value="<%= rs.getString("SECTIONID") %>" name="SECTIONID" size="10"></td>
+        <td><input value="<%= rs.getString("COURSEID") %>" name="COURSEID" size="10"></td>
+        <td><input value="<%= rs.getString("QUARTER") %>" name="QUARTER" size="10"></td>
+        <td><input value="<%= rs.getInt("YEAR") %>" name="YEAR" size="10"></td>
+        <td><input value="<%= rs.getString("DAY_OF_WEEK") %>" name="DAY_OF_WEEK" size="10"></td>
+        <td><input value="<%= rs.getString("START_TIME") %>" name="START_TIME" size="10"></td>
+        <td><input value="<%= rs.getString("End_TIME") %>" name="END_TIME" size="10"></td>
+        <td><input value="<%= rs.getString("BUILDING") %>" name="BUILDING" size="10"></td>
+        <td><input value="<%= rs.getString("TYPE") %>" name="TYPE" size="10"></td>
         <td><input type="submit" value="Update"></td>
         </form>
         <form action="regular_meeting.jsp" method="get">

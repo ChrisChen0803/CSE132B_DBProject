@@ -35,5 +35,8 @@
 <li>
 <a href="section.jsp">Section<a>
 </li>
+<li>
+<a href="regular_meeting.jsp">Section<a>
+</li>
 </ul>
 </html>
